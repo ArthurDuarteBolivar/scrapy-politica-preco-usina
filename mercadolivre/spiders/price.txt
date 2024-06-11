@@ -1,0 +1,104 @@
+        price = response.xpath('//*[@id="price"]/div/div[1]/div[1]/span/span/span[2]/text()').get()
+        price_decimal = response.xpath('//*[@id="price"]/div/div[1]/div[1]/span/span/span[4]/text()').get()
+        
+        if price and price_decimal:
+            new_price = f"{price},{price_decimal}"
+        elif price:
+            new_price = price
+        else:
+            new_price = '0'
+            
+        if new_price == '0':
+            price = response.xpath('//*[@id="ui-pdp-main-container"]/div[1]/div/div[1]/div[2]/div[3]/div[1]/div[1]/span/span/span[2]/text()').get()
+            price_decimal = response.xpath('//*[@id="ui-pdp-main-container"]/div[1]/div/div[1]/div[2]/div[3]/div[1]/div[1]/span/span/span[4]/text()').get()
+            
+            if price and price_decimal:
+                new_price = f"{price},{price_decimal}"
+            elif price:
+                new_price = price
+            else:
+                new_price = '0'
+
+            try:
+                new_price_float = float(new_price.replace('.', '').replace(',', '.'))
+                if new_price_float == 0.0:
+                    price = response.xpath('//*[@id="ui-pdp-main-container"]/div[1]/div/div[1]/div[2]/div[3]/div[1]/div[1]/span[1]/span/span[2]/text()').get()
+                    price_decimal = response.xpath('//*[@id="ui-pdp-main-container"]/div[1]/div/div[1]/div[2]/div[3]/div[1]/div[1]/span[1]/span/span[4]/text()').get()
+                    
+                    if price and price_decimal:
+                        new_price = f"{price},{price_decimal}"
+                    elif price:
+                        new_price = price
+                    else:
+                        new_price = '0'
+                        if new_price == 0:
+                            price = response.xpath('//*[@id="ui-pdp-main-container"]/div[1]/div/div[1]/div[2]/div[2]/div[1]/div[1]/span[1]/span/span[2]/text()').get()
+                            price_decimal = response.xpath('//*[@id="ui-pdp-main-container"]/div[1]/div/div[1]/div[2]/dv[2]/div[1]/div[1]/span[1]/span/span[4]/text()').get()
+                            
+                            if price and price_decimal:
+                                new_price = f"{price},{price_decimal}"
+                            elif price:
+                                new_price = price
+                            else:
+                                new_price = '0'
+                                if new_price == 0:
+                                    price = response.xpath('//*[@id="ui-pdp-main-container"]/div[1]/div/div[1]/div[2]/div[3]/div[1]/div[1]/span/span/span[2]/text()').get()
+                                    price_decimal = response.xpath('//*[@id="ui-pdp-main-container"]/div[1]/div/div[1]/div[2]/div[3]/div[1]/div[1]/span/span/span[4]/text()').get()
+                                    
+                                    if price and price_decimal:
+                                        new_price = f"{price},{price_decimal}"
+                                    elif price:
+                                        new_price = price
+                                    else:
+                                        new_price = '0'
+
+                                    try:
+                                        new_price_float = float(new_price.replace('.', '').replace(',', '.'))
+                                        if new_price_float == 0.0:
+                                            price = response.xpath('//*[@id="ui-pdp-main-container"]/div[1]/div/div[1]/div[2]/div[3]/div[1]/div[1]/span[1]/span/span[2]/text()').get()
+                                            price_decimal = response.xpath('//*[@id="ui-pdp-main-container"]/div[1]/div/div[1]/div[2]/div[3]/div[1]/div[1]/span[1]/span/span[4]/text()').get()
+                                            
+                                            if price and price_decimal:
+                                                new_price = f"{price},{price_decimal}"
+                                            elif price:
+                                                new_price = price
+                                            else:
+                                                new_price = '0'
+
+                                            try:
+                                                new_price_float = float(new_price.replace('.', '').replace(',', '.'))
+                                            except ValueError:
+                                                new_price_float = 0.0
+                                    except ValueError:
+                                        new_price_float = 0
+                                        if new_price_float == 0:
+                                            price = response.xpath('//*[@id="ui-pdp-main-container"]/div[1]/div/div[1]/div[2]/div[3]/div[1]/div[1]/span[1]/span/span[2]/text()').get()
+                                            price_decimal = response.xpath('//*[@id="ui-pdp-main-container"]/div[1]/div/div[1]/div[2]/div[3]/div[1]/div[1]/span[1]/span/span[4]/text()').get()
+                                            
+                                            if price and price_decimal:
+                                                new_price = f"{price},{price_decimal}"
+                                            elif price:
+                                                new_price = price
+                                            else:
+                                                new_price = '0'
+
+                                            try:
+                                                new_price_float = float(new_price.replace('.', '').replace(',', '.'))
+                                            except ValueError:
+                                                new_price_float = 0.0
+
+                                                try:
+                                                    new_price_float = float(new_price.replace('.', '').replace(',', '.'))
+                                                except ValueError:
+                                                    new_price_float = 0.0
+
+                    try:
+                        new_price_float = float(new_price.replace('.', '').replace(',', '.'))
+                    except ValueError:
+                        new_price_float = 0.0
+            except ValueError:
+                new_price_float = 0
+        try:
+            new_price_float = float(new_price.replace('.', '').replace(',', '.'))
+        except ValueError:
+            new_price_float = 0
