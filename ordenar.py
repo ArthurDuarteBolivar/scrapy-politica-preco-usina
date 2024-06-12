@@ -117,8 +117,7 @@ def read_text(text):
             if current_item['Modelo'] == "Bob 200":
                 bob200.append((format_item(current_item), current_item['Loja']))
             if current_item['Modelo'] == "Storm 200 MONO":
-                mono200.append([(format_item(current_item), current_item['Loja']), current_item['Loja']])
-            # items.append((format_item(current_item), current_item['Loja']))
+                mono200.append((format_item(current_item), current_item['Loja']))
             current_item = {}
 
 
