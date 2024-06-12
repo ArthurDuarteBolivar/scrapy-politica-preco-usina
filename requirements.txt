@@ -1,0 +1,11 @@
+tqdm
+selenium
+pandas
+python-docx
+spire.doc
+scrapy
+opencv-python
+requests
+numpy
+pudb
+unidecode

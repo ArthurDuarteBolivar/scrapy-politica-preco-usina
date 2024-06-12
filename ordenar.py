@@ -46,31 +46,31 @@ def read_text(text):
                         if current_item['Modelo'] == "Nao indentificado":
                             naoIndentificado.append(format_item_dif(current_item))
                         if current_item['Modelo'] == "Storm 40":
-                            storm40.append([format_item(current_item), current_item['Loja']])
+                            storm40.append((format_item(current_item), current_item['Loja']))
                         if current_item['Modelo'] == "Lite 60":
-                            lite60.append([format_item(current_item), current_item['Loja']])
+                            lite60.append((format_item(current_item), current_item['Loja']))
                         if current_item['Modelo'] == "Storm 60":
-                            storm60.append([format_item(current_item), current_item['Loja']])
+                            storm60.append((format_item(current_item), current_item['Loja']))
                         if current_item['Modelo'] == "Lite 70":
-                            lite70.append([format_item(current_item), current_item['Loja']])
+                            lite70.append((format_item(current_item), current_item['Loja']))
                         if current_item['Modelo'] == "Storm 70":
-                            storm70.append([format_item(current_item), current_item['Loja']])
+                            storm70.append((format_item(current_item), current_item['Loja']))
                         if current_item['Modelo'] == "Bob 90":
-                            bob90.append([format_item(current_item), current_item['Loja']])
+                            bob90.append((format_item(current_item), current_item['Loja']))
                         if current_item['Modelo'] == "Storm 120":
-                            storm120.append([format_item(current_item), current_item['Loja']])
+                            storm120.append((format_item(current_item), current_item['Loja']))
                         if current_item['Modelo'] == "Lite 120":
-                            lite120.append([format_item(current_item), current_item['Loja']])
+                            lite120.append((format_item(current_item), current_item['Loja']))
                         if current_item['Modelo'] == "Bob 120":
-                            bob120.append([format_item(current_item), current_item['Loja']])
+                            bob120.append((format_item(current_item), current_item['Loja']))
                         if current_item['Modelo'] == "Storm 200":
-                            storm200.append([format_item(current_item), current_item['Loja']])
+                            storm200.append((format_item(current_item), current_item['Loja']))
                         if current_item['Modelo'] == "Lite 200":
-                            lite200.append([format_item(current_item), current_item['Loja']])
+                            lite200.append((format_item(current_item), current_item['Loja']))
                         if current_item['Modelo'] == "Bob 200":
-                            bob200.append([format_item(current_item), current_item['Loja']])
+                            bob200.append((format_item(current_item), current_item['Loja']))
                         if current_item['Modelo'] == "Storm 200 MONO":
-                            mono200.append([format_item(current_item), current_item['Loja']])
+                            mono200.append((format_item(current_item), current_item['Loja']))
                         current_item = {}
                 current_item['Modelo'] = line.split("Modelo:", 1)[1].strip()
                 
@@ -93,32 +93,32 @@ def read_text(text):
             if current_item['Modelo'] == "Nao indentificado":
                 naoIndentificado.append(format_item_dif(current_item))
             if current_item['Modelo'] == "Storm 40":
-                storm40.append([format_item(current_item), current_item['Loja']])
+                storm40.append((format_item(current_item), current_item['Loja']))
             if current_item['Modelo'] == "Lite 60":
-                lite60.append([format_item(current_item), current_item['Loja']])
+                lite60.append((format_item(current_item), current_item['Loja']))
             if current_item['Modelo'] == "Storm 60":
-                storm60.append([format_item(current_item), current_item['Loja']])
+                storm60.append((format_item(current_item), current_item['Loja']))
             if current_item['Modelo'] == "Lite 70":
-                lite70.append([format_item(current_item), current_item['Loja']])
+                lite70.append((format_item(current_item), current_item['Loja']))
             if current_item['Modelo'] == "Storm 70":
-                storm70.append([format_item(current_item), current_item['Loja']])
+                storm70.append((format_item(current_item), current_item['Loja']))
             if current_item['Modelo'] == "Bob 90":
-                bob90.append([format_item(current_item), current_item['Loja']])
+                bob90.append((format_item(current_item), current_item['Loja']))
             if current_item['Modelo'] == "Storm 120":
-                storm120.append([format_item(current_item), current_item['Loja']])
+                storm120.append((format_item(current_item), current_item['Loja']))
             if current_item['Modelo'] == "Lite 120":
-                lite120.append([format_item(current_item), current_item['Loja']])
+                lite120.append((format_item(current_item), current_item['Loja']))
             if current_item['Modelo'] == "Bob 120":
-                bob120.append([format_item(current_item), current_item['Loja']])
+                bob120.append((format_item(current_item), current_item['Loja']))
             if current_item['Modelo'] == "Storm 200":
-                storm200.append([format_item(current_item), current_item['Loja']])
+                storm200.append((format_item(current_item), current_item['Loja']))
             if current_item['Modelo'] == "Lite 200":
-                lite200.append([format_item(current_item), current_item['Loja']])
+                lite200.append((format_item(current_item), current_item['Loja']))
             if current_item['Modelo'] == "Bob 200":
-                bob200.append([format_item(current_item), current_item['Loja']])
+                bob200.append((format_item(current_item), current_item['Loja']))
             if current_item['Modelo'] == "Storm 200 MONO":
-                mono200.append([[format_item(current_item), current_item['Loja']], current_item['Loja']])
-            # items.append([format_item(current_item), current_item['Loja']])
+                mono200.append([(format_item(current_item), current_item['Loja']), current_item['Loja']])
+            # items.append((format_item(current_item), current_item['Loja']))
             current_item = {}
 
 
