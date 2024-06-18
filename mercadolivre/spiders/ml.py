@@ -1,3 +1,6 @@
+from ultralytics import YOLO
+
+model = YOLO(r"mercadolivre\spiders\best.pt")
 import cv2
 import requests
 import numpy as np
@@ -11,6 +14,71 @@ import scrapy
 import requests
 import os
 from docx import Document
+import pandas
+
+start_row = 20  
+end_row = 33
+num_rows = end_row - start_row
+
+
+df = pandas.read_excel("GESTÃO DE AÇÕES E-COMMERCE.xlsx", usecols='C:K', skiprows=start_row, nrows=num_rows, engine='openpyxl')
+
+df.columns = ['PRODUTO', 'SITE', 'COLUNA3', 'CLÁSSICO ML', 'COLUNA5', 'PREMIUM ML', 'COLUNA7', 'MARKETPLACES', 'COLUNA9']
+
+
+for index, i in df.iterrows():
+    if i['PRODUTO'] == "FONTE 40A":
+        fonte40Marketplace = round(i['COLUNA3'], 2);
+        fonte40Classico = round(i['COLUNA5'], 2);
+        fonte40Premium = round(i['COLUNA7'], 2);
+    elif i['PRODUTO'] == "FONTE 60A":
+        fonte60Marketplace = round(i['COLUNA3'], 2);
+        fonte60Classico = round(i['COLUNA5'], 2);
+        fonte60Premium = round(i['COLUNA7'], 2);
+    elif i['PRODUTO'] == "FONTE 60A LITE":
+        fonte60liteMarketplace = round(i['COLUNA3'], 2);
+        fonte60liteClassico = round(i['COLUNA5'], 2);
+        fonte60litePremium = round(i['COLUNA7'], 2);
+    elif i['PRODUTO'] == "FONTE 70A":
+        fonte70Marketplace = round(i['COLUNA3'], 2);
+        fonte70Classico = round(i['COLUNA5'], 2);
+        fonte70Premium = round(i['COLUNA7'], 2);
+    elif i['PRODUTO'] == "FONTE 70A LITE":
+        fonte70liteMarketplace = round(i['COLUNA3'], 2);
+        fonte70liteClassico = round(i['COLUNA5'], 2);
+        fonte70litePremium = round(i['COLUNA7'], 2);
+    elif i['PRODUTO'] == "FONTE 90 BOB":
+        fonte90bobMarketplace = round(i['COLUNA3'], 2);
+        fonte90bobClassico = round(i['COLUNA5'], 2);
+        fonte90bobPremium = round(i['COLUNA7'], 2);
+    elif i['PRODUTO'] == "FONTE 120 BOB":
+        fonte120bobMarketplace = round(i['COLUNA3'], 2);
+        fonte120bobClassico = round(i['COLUNA5'], 2);
+        fonte120bobPremium = round(i['COLUNA7'], 2);
+    elif i['PRODUTO'] == "FONTE 120A LITE":
+        fonte120liteMarketplace = round(i['COLUNA3'], 2);
+        fonte120liteClassico = round(i['COLUNA5'], 2);
+        fonte120litePremium = round(i['COLUNA7'], 2);
+    elif i['PRODUTO'] == "FONTE 120A":
+        fonte120Marketplace = round(i['COLUNA3'], 2);
+        fonte120Classico = round(i['COLUNA5'], 2);
+        fonte120Premium = round(i['COLUNA7'], 2);
+    elif i['PRODUTO'] == "FONTE 200 BOB":
+        fonte200bobMarketplace = round(i['COLUNA3'], 2);
+        fonte200bobClassico = round(i['COLUNA5'], 2);
+        fonte200bobPremium = round(i['COLUNA7'], 2);
+    elif i['PRODUTO'] == "FONTE 200A LITE":
+        fonte200liteMarketplace = round(i['COLUNA3'], 2);
+        fonte200liteClassico = round(i['COLUNA5'], 2);
+        fonte200litePremium = round(i['COLUNA7'], 2);
+    elif i['PRODUTO'] == "FONTE 200 MONO":
+        fonte200monoMarketplace = round(i['COLUNA3'], 2);
+        fonte200monoClassico = round(i['COLUNA5'], 2);
+        fonte200monoPremium = round(i['COLUNA7'], 2);
+    elif i['PRODUTO'] == "FONTE 200A":
+        fonte200Marketplace = round(i['COLUNA3'], 2);
+        fonte200Classico = round(i['COLUNA5'], 2);
+        fonte200Premium = round(i['COLUNA7'], 2);
 
 # if os.path.exists("dados_scrapy.docx"):
 #     doc = Document("dados_scrapy.docx")
@@ -45,7 +113,11 @@ def extract_price(response):
 def download_image_from_url(url):
     response = requests.get(url)
     img = cv2.imdecode(np.frombuffer(response.content, np.uint8), cv2.IMREAD_COLOR)
-    return img
+    results = model.predict(img)
+
+    for result in results:
+        probs = result.probs
+        return result.names.get(probs.top1)
 
 def download_image(image_src, download_folder, desired_filename):
     return
@@ -65,12 +137,13 @@ def download_image(image_src, download_folder, desired_filename):
     #     return None  # Return None on failure
 
 
-options = ["Storm 40"]#, "Storm 60" ,"Lite 60","Storm 70", "Lite 70", "Bob 90", "Storm 120", "Lite 120", "Bob 120", "Storm 200", "Storm 200 MONO", "Bob 200", "Lite 200"
+options = ["FONTE 40A"]#, "FONTE 60A" ,"FONTE 60A LITE","FONTE 70A", "FONTE 70A LITE", "FONTE 90 BOB", "FONTE 120A", "FONTE 120A LITE", "FONTE 120 BOB", "FONTE 200A", "FONTE 200 MONO", "FONTE 200 BOB", "FONTE 200A LITE"
 
 
 
 class MlSpider(scrapy.Spider):
     option_selected = ""
+    option_selected_new = ""
     name = 'ml'
     start_urls = ["https://lista.mercadolivre.com.br/fonte-jfa"]
     
@@ -81,52 +154,53 @@ class MlSpider(scrapy.Spider):
     
     
     def parse(self, response, **kwargs):
-        # yield from self.parse_all("Storm 40")
-        # yield from self.parse_all("Lite 60")
-        # yield from self.parse_all("Storm 60")
-        # yield from self.parse_all("Storm 70")
-        # yield from self.parse_all("Lite 70")
-        # yield from self.parse_all("Bob 90")
-        # yield from self.parse_all("Storm 120")
-        # yield from self.parse_all("Lite 120")
-        # yield from self.parse_all("Bob 120")
+        # yield from self.parse_all("FONTE 40A")
+        # yield from self.parse_all("FONTE 60A LITE")
+        # yield from self.parse_all("FONTE 60A")
+        # yield from self.parse_all("FONTE 70A")
+        # yield from self.parse_all("FONTE 70A LITE")
+        # yield from self.parse_all("FONTE 90 BOB")
+        # yield from self.parse_all("FONTE 120A")
+        # yield from self.parse_all("FONTE 120A LITE")
+        # yield from self.parse_all("FONTE 120 BOB")
         yield from self.parse_all(self.palavra)
-        # yield from self.parse_all("Storm 200 MONO")
-        # yield from self.parse_all("Bob 200")
-        # yield from self.parse_all("Lite 200")
+        # yield from self.parse_all("FONTE 200 MONO")
+        # yield from self.parse_all("FONTE 200 BOB")
+        # yield from self.parse_all("FONTE 200A LITE")
         
         
         
         
     def parse_all(self, option_function):
         self.option_selected = option_function
+        self.option_selected_new = option_function
         search = ""
-        if self.option_selected == "Storm 40":
-            search = "fonte storm 40a jfa"
-        if self.option_selected == "Lite 60":
-            search = "fonte lite 60a jfa"
-        elif self.option_selected == "Storm 60":
-            search = "fonte storm 60a jfa"
-        if self.option_selected == "Lite 70":
-            search = "fonte lite 70a jfa"
-        elif self.option_selected == "Storm 70":
-            search = "fonte storm 70a jfa"
-        elif self.option_selected == "Bob 90":
-            search = "fonte bob 90a jfa"
-        elif self.option_selected == "Storm 120":
-            search = "fonte storm 120a jfa"
-        elif self.option_selected == "Lite 120":
-            search = "fonte lite 120a jfa"
-        elif self.option_selected == "Bob 120":
-            search = "fonte bob 120a jfa"
-        elif self.option_selected == "Storm 200":
-            search = "fonte storm 200a jfa"
-        elif self.option_selected == "Lite 200":
-            search = "fonte lite 200a jfa"
-        elif self.option_selected == "Bob 200":
-            search = "fonte bob 200a jfa"
-        elif self.option_selected == "Storm 200 MONO":
-            search = "fonte storm 200a mono jfa"
+        if self.option_selected == "FONTE 40A":
+            search = "fonte storm 40a"
+        if self.option_selected == "FONTE 60A LITE":
+            search = "fonte lite 60a"
+        elif self.option_selected == "FONTE 60A":
+            search = "fonte storm 60a"
+        if self.option_selected == "FONTE 70A LITE":
+            search = "fonte lite 70a"
+        elif self.option_selected == "FONTE 70A":
+            search = "fonte storm 70a"
+        elif self.option_selected == "FONTE 90 BOB":
+            search = "fonte bob 90a"
+        elif self.option_selected == "FONTE 120A":
+            search = "fonte storm 120a"
+        elif self.option_selected == "FONTE 120A LITE":
+            search = "fonte lite 120a"
+        elif self.option_selected == "FONTE 120 BOB":
+            search = "fonte bob 120a"
+        elif self.option_selected == "FONTE 200A":
+            search = "fonte storm 200a"
+        elif self.option_selected == "FONTE 200A LITE":
+            search = "fonte lite 200a"
+        elif self.option_selected == "FONTE 200 BOB":
+            search = "fonte bob 200a"
+        elif self.option_selected == "FONTE 200 MONO":
+            search = "fonte storm 200a mono"
         search = search.replace(" ", "%20")
         # search = "fonte%2040a%20jfa"
         headers = {
@@ -160,7 +234,6 @@ class MlSpider(scrapy.Spider):
         total = paging_data.get('total') 
         offset = paging_data.get('offset') 
         limit = paging_data.get('limit') 
-        
         while offset < total:
             request = requests.get(
                 f"https://app.nubimetrics.com/api/search/items?attributes=results,available_filters,paging,filters&buying_mode=buy_it_now&exportData=false&isControlPrice=false&language=pt_BR&limit=200&offset={offset}&order=price_asc&pvp=0&search_filters=condition%3Dnew@&seller_id=1242763049&site_id=MLB&to_search={search}&typeSearch=q",
@@ -183,7 +256,7 @@ class MlSpider(scrapy.Spider):
                     url = permalink + f"?pdp_filters=item_id:{id}"
                 else:
                     url = permalink
-                # if id != "MLB3727486257":
+                # if id != "MLB3348494984":
                 #     continue
                 # else:
                 #     print(item.get("permalink"))
@@ -193,7 +266,7 @@ class MlSpider(scrapy.Spider):
                 price = item.get('price')
                 new_name = name.lower();
                 new_name = unidecode.unidecode(new_name)
-                if self.option_selected == "Storm 40":       
+                if self.option_selected == "FONTE 40A":       
                     if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
                         if "40a" in new_name or "40" in new_name or "40 amperes" in new_name or "40amperes" in new_name or "36a" in new_name or "36" in new_name or "36 amperes" in new_name or "36amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
@@ -203,7 +276,7 @@ class MlSpider(scrapy.Spider):
                             yield scrapy.Request(url='https://www.renovonline.com.br/fonte-jfa-40a_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
                             yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-jfa-40a_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
-                elif self.option_selected == "Storm 60":
+                elif self.option_selected == "FONTE 60A":
                        
                     if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
                         if "60a" in new_name or "60" in new_name or "60 amperes" in new_name or "60amperes" in new_name or "60 a" in new_name:
@@ -215,7 +288,7 @@ class MlSpider(scrapy.Spider):
                             yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-jfa-60a_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
 
                             
-                elif self.option_selected == "Lite 60":
+                elif self.option_selected == "FONTE 60A LITE":
                     if "bob" not in new_name and ("lite" in new_name or "light" in new_name) and "controle" not in new_name and 'jfa' in new_name:
                         if "60a" in new_name or "60" in new_name or "60 amperes" in new_name or "60amperes" in new_name or "60 a" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
@@ -226,7 +299,7 @@ class MlSpider(scrapy.Spider):
                             yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-jfa-60a-lite_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
 
                             
-                elif self.option_selected == "Storm 70":
+                elif self.option_selected == "FONTE 70A":
                     
                     if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
                         if "70a" in new_name or "70" in new_name or "70 amperes" in new_name or "70amperes" in new_name or "70 a" in new_name:
@@ -239,7 +312,7 @@ class MlSpider(scrapy.Spider):
 
                             
                             
-                elif self.option_selected == "Lite 70":
+                elif self.option_selected == "FONTE 70A LITE":
                     
                     if "bob" not in new_name and  ("lite" in new_name or "light" in new_name) and "controle" not in new_name and 'jfa' in new_name:
                         if "70a" in new_name or "70" in new_name or "70 amperes" in new_name or "70amperes" in new_name or "70 a" in new_name:
@@ -252,7 +325,7 @@ class MlSpider(scrapy.Spider):
 
                             
                             
-                elif self.option_selected == "Bob 90":
+                elif self.option_selected == "FONTE 90 BOB":
                     
                     if "bob" in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
                         if "90a" in new_name or "90" in new_name or "90 amperes" in new_name or "90amperes" in new_name or "90 a" in new_name:
@@ -265,7 +338,7 @@ class MlSpider(scrapy.Spider):
 
                             
                             
-                elif self.option_selected == "Storm 120":
+                elif self.option_selected == "FONTE 120A":
                     
                     if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
                         if "120a" in new_name or "120" in new_name or "120 amperes" in new_name or "120amperes" in new_name or "120 a" in new_name:
@@ -278,7 +351,7 @@ class MlSpider(scrapy.Spider):
 
                             
                             
-                elif self.option_selected == "Lite 120":
+                elif self.option_selected == "FONTE 120A LITE":
                     
                     if "bob" not in new_name and  ("lite" in new_name or "light" in new_name) and "controle" not in new_name and 'jfa' in new_name:
                         if "120a" in new_name or "120" in new_name or "120 amperes" in new_name or "120amperes" in new_name or "120 a" in new_name:
@@ -291,7 +364,7 @@ class MlSpider(scrapy.Spider):
 
                             
                             
-                elif self.option_selected == "Bob 120":
+                elif self.option_selected == "FONTE 120 BOB":
                     
                     if "bob" in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
                         if "120a" in new_name or "120" in new_name or "120 amperes" in new_name or "120amperes" in new_name or "120 a" in new_name:
@@ -304,9 +377,9 @@ class MlSpider(scrapy.Spider):
 
                             
                             
-                elif self.option_selected == "Storm 200":
+                elif self.option_selected == "FONTE 200A":
                     
-                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name and 'mono' not in new_name and 'monovolt' not in new_name:
+                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name and 'mono' not in new_name and 'mono' not in new_name and 'monovolt' not in new_name and '220v' not in new_name:
                         if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name or "200 a" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-200a-jfa_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
@@ -317,9 +390,9 @@ class MlSpider(scrapy.Spider):
 
                             
                             
-                elif self.option_selected == "Storm 200 MONO":
+                elif self.option_selected == "FONTE 200 MONO":
                     
-                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name and 'mono' in new_name:
+                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name and ("mono" in new_name or "220v" in new_name or "monovolt" in new_name):
                         if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name or "200 a" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price,'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-200a-mono-jfa_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
@@ -330,8 +403,7 @@ class MlSpider(scrapy.Spider):
 
                             
                             
-                elif self.option_selected == "Lite 200":
-                    
+                elif self.option_selected == "FONTE 200A LITE":
                     if "bob" not in new_name and  ("lite" in new_name or "light" in new_name) and "controle" not in new_name and 'jfa' in new_name:
                         if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name or "200 a" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
@@ -343,9 +415,8 @@ class MlSpider(scrapy.Spider):
 
                             
                             
-                elif self.option_selected == "Bob 200":
-                    
-                    if "bob" in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name and 'mono' not in new_name and 'monovolt' not in new_name:
+                elif self.option_selected == "FONTE 200 BOB":
+                    if "bob" in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name and 'mono' not in new_name and 'mono' not in new_name and 'monovolt' not in new_name and '220v' not in new_name:
                         if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name or "200 a" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-200a-bob-jfa_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
@@ -361,13 +432,29 @@ class MlSpider(scrapy.Spider):
         loja = response.meta['loja']
         listing_type = response.meta['listing_type']
         # price = response.meta['price']
-        
-        id_anuncio = response.xpath('//*[@id="denounce"]/div/p/span/text()').get().replace("#", "")
-        imagem = response.xpath('//*[@id="gallery"]/div/div/span[2]/figure/img/@data-zoom').get()
-        if imagem:
-            download_image(imagem, self.option_selected, f"{self.option_selected}-{id_anuncio}")
-        
+        self.option_selected_new = self.option_selected
+        # id_anuncio = response.xpath('//*[@id="denounce"]/div/p/span/text()').get().replace("#", "")
+        # imagem = response.xpath('//*[@id="gallery"]/div/div/span[2]/figure/img/@data-zoom').get()
+        # if imagem == None:
+        #     imagem = response.xpath('//*[@id="gallery"]/div/div[1]/span[1]/figure/img/@data-zoom').get()
+        # if imagem == None:
+        #     imagem = response.xpath('//*[@id="ui-pdp-main-container"]/div[1]/div/div[1]/div[1]/div/div/div/span[1]/figure/img/@data-zoom').get()
+        # if imagem == None:
+        #     imagem = response.xpath('//*[@id="gallery"]/div/div[1]/span[2]/figure/img/@data-zoom').get()
+        # if imagem == None:
+        #     imagem = response.xpath('//*[@id="gallery"]/div/div[1]/span[3]/figure/img/@data-zoom').get()
+        # if imagem == None:
+        #     imagem = response.xpath('//*[@id="gallery"]/div/div/span[1]/figure/img/@data-zoom').get()
+        # if self.option_selected_new == "FONTE 200A LITE" or self.option_selected_new == "FONTE 200A" or self.option_selected_new == "FONTE 200 BOB":
+        #     predict = download_image_from_url(imagem)
+        #     if predict == "lite":
+        #         self.option_selected_new = "FONTE 200A LITE"
+        #     elif predict == "bob":
+        #         self.option_selected_new = "FONTE 200 BOB"
+        #     elif predict == "storm":
+        #         self.option_selected_new = "FONTE 200A"
         price = extract_price(response)
+        
         new_price_float = price
            
         
@@ -410,58 +497,58 @@ class MlSpider(scrapy.Spider):
         
             
         if tipo == "Clássico" and new_price_float:
-            if self.option_selected == "Storm 40" and new_price_float >= 402.79:
+            if self.option_selected_new == "FONTE 40A" and new_price_float >= fonte40Classico:
                 return;
-            elif self.option_selected == "Lite 60" and new_price_float >= 364.95:
+            elif self.option_selected_new == "FONTE 60A LITE" and new_price_float >= fonte60liteClassico:
                 return;
-            elif self.option_selected == "Storm 60" and new_price_float >= 443.07:
+            elif self.option_selected_new == "FONTE 60A" and new_price_float >= fonte60Classico:
                 return;
-            elif self.option_selected == "Lite 70" and new_price_float >= 408.73:
+            elif self.option_selected_new == "FONTE 70A LITE" and new_price_float >= fonte70liteClassico:
                 return;
-            elif self.option_selected == "Storm 70" and new_price_float >= 493.42:
+            elif self.option_selected_new == "FONTE 70A" and new_price_float >= fonte70Classico:
                 return;
-            elif self.option_selected == "Bob 90" and new_price_float >= 422.93:
+            elif self.option_selected_new == "FONTE 90 BOB" and new_price_float >= fonte90bobClassico:
                 return;
-            elif self.option_selected == "Bob 120" and new_price_float >= 499.46:
+            elif self.option_selected_new == "FONTE 120 BOB" and new_price_float >= fonte120bobClassico:
                 return;
-            elif self.option_selected == "Lite 120" and new_price_float >= 536.26:
+            elif self.option_selected_new == "FONTE 120A LITE" and new_price_float >= fonte120liteClassico:
                 return;
-            elif self.option_selected == "Storm 120" and new_price_float >= 634.40:
+            elif self.option_selected_new == "FONTE 120A" and new_price_float >= fonte120Classico:
                 return;
-            elif self.option_selected == "Bob 200" and new_price_float >= 624.33:
+            elif self.option_selected_new == "FONTE 200 BOB" and new_price_float >= fonte200bobClassico:
                 return;
-            elif self.option_selected == "Lite 200" and new_price_float >= 681.83:
+            elif self.option_selected_new == "FONTE 200A LITE" and new_price_float >= fonte200liteClassico:
                 return;
-            elif self.option_selected == "Storm 200 MONO" and new_price_float >= 736.61:
+            elif self.option_selected_new == "FONTE 200 MONO" and new_price_float >= fonte200monoClassico:
                 return;
-            elif self.option_selected == "Storm 200" and new_price_float >= 805.59:
+            elif self.option_selected_new == "FONTE 200A" and new_price_float >= fonte200Classico:
                 return;
         elif tipo == "Premium" and new_price_float:
-            if self.option_selected == "Storm 40" and new_price_float >= 433.00:
+            if self.option_selected_new == "FONTE 40A" and new_price_float >= fonte40Premium:
                 return;
-            elif self.option_selected == "Lite 60" and new_price_float >= 390.43:
+            elif self.option_selected_new == "FONTE 60A LITE" and new_price_float >= fonte60litePremium:
                 return;
-            elif self.option_selected == "Storm 60" and new_price_float >= 473.28:
+            elif self.option_selected_new == "FONTE 60A" and new_price_float >= fonte60Premium:
                 return;
-            elif self.option_selected == "Lite 70" and new_price_float >= 434.42:
+            elif self.option_selected_new == "FONTE 70A LITE" and new_price_float >= fonte70litePremium:
                 return;
-            elif self.option_selected == "Storm 70" and new_price_float >= 523.63:
+            elif self.option_selected_new == "FONTE 70A" and new_price_float >= fonte70Premium:
                 return;
-            elif self.option_selected == "Bob 90" and new_price_float >= 443.07:
+            elif self.option_selected_new == "FONTE 90 BOB" and new_price_float >= fonte90bobPremium:
                 return;
-            elif self.option_selected == "Bob 120" and new_price_float >= 539.74:
+            elif self.option_selected_new == "FONTE 120 BOB" and new_price_float >= fonte120bobPremium:
                 return;
-            elif self.option_selected == "Lite 120" and new_price_float >= 573.36:
+            elif self.option_selected_new == "FONTE 120A LITE" and new_price_float >= fonte120litePremium:
                 return;
-            elif self.option_selected == "Storm 120" and new_price_float >= 674.68:
+            elif self.option_selected_new == "FONTE 120A" and new_price_float >= fonte120Premium:
                 return;
-            elif self.option_selected == "Bob 200" and new_price_float >= 694.82:
+            elif self.option_selected_new == "FONTE 200 BOB" and new_price_float >= fonte200bobPremium:
                 return;
-            elif self.option_selected == "Lite 200" and new_price_float >= 716.71:
+            elif self.option_selected_new == "FONTE 200A LITE" and new_price_float >= fonte200litePremium:
                 return;
-            elif self.option_selected == "Storm 200 MONO" and new_price_float >= 774.88:
+            elif self.option_selected_new == "FONTE 200 MONO" and new_price_float >= fonte200monoPremium:
                 return;
-            elif self.option_selected == "Storm 200" and new_price_float >= 845.87:
+            elif self.option_selected_new == "FONTE 200A" and new_price_float >= fonte200Premium:
                 return;
 
 
@@ -471,36 +558,36 @@ class MlSpider(scrapy.Spider):
 
 
     def finish(self, total_price, url, nomeFonte, loja, lugar):
-        if self.option_selected == "Storm 40" and total_price >= 352.97:
+        if self.option_selected_new == "FONTE 40A" and total_price >= fonte40Marketplace:
             return;
-        elif self.option_selected == "Lite 60" and total_price >= 321.09:
+        elif self.option_selected_new == "FONTE 60A LITE" and total_price >= fonte60liteMarketplace:
             return;
-        elif self.option_selected == "Storm 60" and total_price >= 391.13:
+        elif self.option_selected_new == "FONTE 60A" and total_price >= fonte60Marketplace:
             return;
-        elif self.option_selected == "Lite 70" and total_price >= 362.36:
+        elif self.option_selected_new == "FONTE 70A LITE" and total_price >= fonte70liteMarketplace:
             return;
-        elif self.option_selected == "Storm 70" and total_price >= 438.83:
+        elif self.option_selected_new == "FONTE 70A" and total_price >= fonte70Marketplace:
             return;
-        elif self.option_selected == "Bob 90" and total_price >= 372.05:
+        elif self.option_selected_new == "FONTE 90 BOB" and total_price >= fonte90bobMarketplace:
             return;
-        elif self.option_selected == "Bob 120" and total_price >= 444.55:
+        elif self.option_selected_new == "FONTE 120 BOB" and total_price >= fonte120bobMarketplace:
             return;
-        elif self.option_selected == "Lite 120" and total_price >= 484.94:
+        elif self.option_selected_new == "FONTE 120A LITE" and total_price >= fonte120liteMarketplace:
             return;
-        elif self.option_selected == "Storm 120" and total_price >= 572.39:
+        elif self.option_selected_new == "FONTE 120A" and total_price >= fonte120Marketplace:
             return;
-        elif self.option_selected == "Bob 200" and total_price >= 562.85:
+        elif self.option_selected_new == "FONTE 200 BOB" and total_price >= fonte200bobMarketplace:
             return;
-        elif self.option_selected == "Lite 200" and total_price >= 624.50:
+        elif self.option_selected_new == "FONTE 200A LITE" and total_price >= fonte200liteMarketplace:
             return;
-        elif self.option_selected == "Storm 200 MONO" and total_price >= 602.61:
+        elif self.option_selected_new == "FONTE 200 MONO" and total_price >= fonte200monoMarketplace:
             return;
-        elif self.option_selected == "Storm 200" and total_price >= 734.57:
+        elif self.option_selected_new == "FONTE 200A" and total_price >= fonte200Marketplace:
             return;
         
         parcelado = self.get_price_previsto("NA")
 
-        doc.add_paragraph(f'Modelo: {self.option_selected}')
+        doc.add_paragraph(f'Modelo: {self.option_selected_new}')
         doc.add_paragraph(f'URL: {url}')
         doc.add_paragraph(f'Nome: {nomeFonte}')
         doc.add_paragraph(f'Preço: {total_price}')
@@ -510,7 +597,7 @@ class MlSpider(scrapy.Spider):
         doc.add_paragraph(f'Lugar: {lugar}')
         doc.add_paragraph("--------------------------------------------------------------------")
         doc.add_paragraph('')
-        doc.save(fr"C:\workspace\mercado-livre\mercadolivre\dados\{self.option_selected}.docx")
+        doc.save(fr"dados/{self.option_selected_new}.docx")
             
         yield {
             'url': url,
@@ -530,6 +617,8 @@ class MlSpider(scrapy.Spider):
             price = i.xpath('.//div/div/div[3]/div/div[1]/div/div/div/div/span/span[2]/text()').get()
             cents = i.xpath('.//div/div/div[3]/div/div[1]/div/div/div/div/span/span[4]/text()').get()
             url = i.xpath('.//div/div/div[3]/div[2]/a/@href').get()
+            
+            
             nomeFonte = nomeFonte.lower()
             nomeFonte = unidecode.unidecode(nomeFonte)
             if not cents:
@@ -537,74 +626,74 @@ class MlSpider(scrapy.Spider):
             if price:
                 price = price.replace('.', '')
                 total_price = float(f"{price}.{cents}")
-            if self.option_selected == "Storm 40":
+            if self.option_selected == "FONTE 40A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "40a" in nomeFonte or "40" in nomeFonte or "40 amperes" in nomeFonte or "40amperes" in nomeFonte or "36a" in nomeFonte or "36" in nomeFonte or "36 amperes" in nomeFonte or "36amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Storm 60":
+            elif self.option_selected == "FONTE 60A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Lite 60":
+            elif self.option_selected == "FONTE 60A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Storm 70":
+            elif self.option_selected == "FONTE 70A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Lite 70":
+            elif self.option_selected == "FONTE 70A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Bob 90":
+            elif self.option_selected == "FONTE 90 BOB":
                 if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "90a" in nomeFonte or "90" in nomeFonte or "90 amperes" in nomeFonte or "90amperes" in nomeFonte or "90 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Storm 120":
+            elif self.option_selected == "FONTE 120A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Lite 120":
+            elif self.option_selected == "FONTE 120A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Bob 120":
+            elif self.option_selected == "FONTE 120 BOB":
                 if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Storm 200":
+            elif self.option_selected == "FONTE 200A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Storm 200 MONO":
+            elif self.option_selected == "FONTE 200 MONO":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Lite 200":
+            elif self.option_selected == "FONTE 200A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Bob 200":
+            elif self.option_selected == "FONTE 200 BOB":
                 if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
@@ -625,74 +714,74 @@ class MlSpider(scrapy.Spider):
             if price:
                 price = price.replace('.', '')
                 total_price = float(f"{price}.{cents}")
-            if self.option_selected == "Storm 40":
+            if self.option_selected == "FONTE 40A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "40a" in nomeFonte or "40" in nomeFonte or "40 amperes" in nomeFonte or "40amperes" in nomeFonte or "36a" in nomeFonte or "36" in nomeFonte or "36 amperes" in nomeFonte or "36amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Storm 60":
+            elif self.option_selected == "FONTE 60A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Lite 60":
+            elif self.option_selected == "FONTE 60A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Storm 70":
+            elif self.option_selected == "FONTE 70A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Lite 70":
+            elif self.option_selected == "FONTE 70A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Bob 90":
+            elif self.option_selected == "FONTE 90 BOB":
                 if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "90a" in nomeFonte or "90" in nomeFonte or "90 amperes" in nomeFonte or "90amperes" in nomeFonte or "90 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Storm 120":
+            elif self.option_selected == "FONTE 120A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Lite 120":
+            elif self.option_selected == "FONTE 120A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Bob 120":
+            elif self.option_selected == "FONTE 120 BOB":
                 if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Storm 200":
+            elif self.option_selected == "FONTE 200A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Storm 200 MONO":
+            elif self.option_selected == "FONTE 200 MONO":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Lite 200":
+            elif self.option_selected == "FONTE 200A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Bob 200":
+            elif self.option_selected == "FONTE 200 BOB":
                 if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)                
@@ -713,74 +802,74 @@ class MlSpider(scrapy.Spider):
             if price:
                 price = price.replace('.', '')
                 total_price = float(f"{price}.{cents}")
-            if self.option_selected == "Storm 40":
+            if self.option_selected == "FONTE 40A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "40a" in nomeFonte or "40" in nomeFonte or "40 amperes" in nomeFonte or "40amperes" in nomeFonte or "36a" in nomeFonte or "36" in nomeFonte or "36 amperes" in nomeFonte or "36amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Storm 60":
+            elif self.option_selected == "FONTE 60A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Lite 60":
+            elif self.option_selected == "FONTE 60A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Storm 70":
+            elif self.option_selected == "FONTE 70A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Lite 70":
+            elif self.option_selected == "FONTE 70A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Bob 90":
+            elif self.option_selected == "FONTE 90 BOB":
                 if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "90a" in nomeFonte or "90" in nomeFonte or "90 amperes" in nomeFonte or "90amperes" in nomeFonte or "90 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Storm 120":
+            elif self.option_selected == "FONTE 120A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Lite 120":
+            elif self.option_selected == "FONTE 120A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Bob 120":
+            elif self.option_selected == "FONTE 120 BOB":
                 if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Storm 200":
+            elif self.option_selected == "FONTE 200A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Storm 200 MONO":
+            elif self.option_selected == "FONTE 200 MONO":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Lite 200":
+            elif self.option_selected == "FONTE 200A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Bob 200":
+            elif self.option_selected == "FONTE 200 BOB":
                 if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
@@ -801,74 +890,74 @@ class MlSpider(scrapy.Spider):
             if price:
                 price = price.replace('.', '')
                 total_price = float(f"{price}.{cents}")
-            if self.option_selected == "Storm 40":
+            if self.option_selected == "FONTE 40A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "40a" in nomeFonte or "40" in nomeFonte or "40 amperes" in nomeFonte or "40amperes" in nomeFonte or "36a" in nomeFonte or "36" in nomeFonte or "36 amperes" in nomeFonte or "36amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Storm 60":
+            elif self.option_selected == "FONTE 60A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Lite 60":
+            elif self.option_selected == "FONTE 60A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Storm 70":
+            elif self.option_selected == "FONTE 70A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Lite 70":
+            elif self.option_selected == "FONTE 70A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Bob 90":
+            elif self.option_selected == "FONTE 90 BOB":
                 if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "90a" in nomeFonte or "90" in nomeFonte or "90 amperes" in nomeFonte or "90amperes" in nomeFonte or "90 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Storm 120":
+            elif self.option_selected == "FONTE 120A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Lite 120":
+            elif self.option_selected == "FONTE 120A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Bob 120":
+            elif self.option_selected == "FONTE 120 BOB":
                 if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Storm 200":
+            elif self.option_selected == "FONTE 200A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Storm 200 MONO":
+            elif self.option_selected == "FONTE 200 MONO":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Lite 200":
+            elif self.option_selected == "FONTE 200A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Bob 200":
+            elif self.option_selected == "FONTE 200 BOB":
                 if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)                
@@ -888,160 +977,163 @@ class MlSpider(scrapy.Spider):
             if price:
                 price = price.replace('.', '')
                 total_price = float(f"{price}.{cents}")
-            if self.option_selected == "Storm 40":
+            if self.option_selected == "FONTE 40A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "40a" in nomeFonte or "40" in nomeFonte or "40 amperes" in nomeFonte or "40amperes" in nomeFonte or "36a" in nomeFonte or "36" in nomeFonte or "36 amperes" in nomeFonte or "36amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Storm 60":
+            elif self.option_selected == "FONTE 60A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Lite 60":
+            elif self.option_selected == "FONTE 60A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Storm 70":
+            elif self.option_selected == "FONTE 70A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Lite 70":
+            elif self.option_selected == "FONTE 70A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Bob 90":
+            elif self.option_selected == "FONTE 90 BOB":
                 if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "90a" in nomeFonte or "90" in nomeFonte or "90 amperes" in nomeFonte or "90amperes" in nomeFonte or "90 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Storm 120":
+            elif self.option_selected == "FONTE 120A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Lite 120":
+            elif self.option_selected == "FONTE 120A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Bob 120":
+            elif self.option_selected == "FONTE 120 BOB":
                 if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Storm 200":
+            elif self.option_selected == "FONTE 200A":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "Storm 200 MONO":
+            elif self.option_selected == "FONTE 200 MONO":
                 if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Lite 200":
+            elif self.option_selected == "FONTE 200A LITE":
                 if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                         
-            elif self.option_selected == "Bob 200":
+            elif self.option_selected == "FONTE 200 BOB":
                 if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
                     if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)       
         
     def get_price_previsto(self, tipo):
         if tipo == "Clássico":
-            if self.option_selected == "Storm 40":
-                return 402.79;
-            elif self.option_selected == "Lite 60":
-                return 364.95;
-            elif self.option_selected == "Storm 60":
-                return 443.07;
-            elif self.option_selected == "Lite 70":
-                return 408.73;
-            elif self.option_selected == "Storm 70":
-                return 493.42;
-            elif self.option_selected == "Bob 90":
-                return 422.93;
-            elif self.option_selected == "Bob 120":
-                return 499.46;
-            elif self.option_selected == "Lite 120":
-                return 536.26;
-            elif self.option_selected == "Storm 120":
-                return 634.40;
-            elif self.option_selected == "Bob 200":
-                return 624.33;
-            elif self.option_selected == "Lite 200":
-                return 681.83;
-            elif self.option_selected == "Storm 200 MONO":
-                return 736.61;
-            elif self.option_selected == "Storm 200":
-                return 805.59;
+            for index, i in df.iterrows():
+                if self.option_selected_new == "FONTE 40A" and i['PRODUTO'] == "FONTE 40A":
+                    return round(i['COLUNA5'], 2);
+                elif self.option_selected_new == "FONTE 60A" and i['PRODUTO'] == "FONTE 60A":
+                    return round(i['COLUNA5'], 2);
+                elif self.option_selected_new == "FONTE 60A LITE" and i['PRODUTO'] == "FONTE 60A LITE":
+                    return round(i['COLUNA5'], 2);
+                elif self.option_selected_new == "FONTE 70A" and i['PRODUTO'] == "FONTE 70A":
+                    return round(i['COLUNA5'], 2);
+                elif self.option_selected_new == "FONTE 70A LITE" and i['PRODUTO'] == "FONTE 70A LITE":
+                    return round(i['COLUNA5'], 2);
+                elif self.option_selected_new == "FONTE 90 BOB" and i['PRODUTO'] == "FONTE 90 BOB":
+                    return round(i['COLUNA5'], 2);
+                elif self.option_selected_new == "FONTE 120 BOB" and i['PRODUTO'] == "FONTE 120 BOB":
+                    return round(i['COLUNA5'], 2);
+                elif self.option_selected_new == "FONTE 120A LITE" and i['PRODUTO'] == "FONTE 120A LITE":
+                    return round(i['COLUNA5'], 2);
+                elif self.option_selected_new == "FONTE 120A" and i['PRODUTO'] == "FONTE 120A":
+                    return round(i['COLUNA5'], 2);
+                elif self.option_selected_new == "FONTE 200 BOB" and i['PRODUTO'] == "FONTE 200 BOB":
+                    return round(i['COLUNA5'], 2);
+                elif self.option_selected_new == "FONTE 200A LITE" and i['PRODUTO'] == "FONTE 200A LITE":
+                    return round(i['COLUNA5'], 2);
+                elif self.option_selected_new == "FONTE 200 MONO" and i['PRODUTO'] == "FONTE 200 MONO":
+                    return round(i['COLUNA5'], 2);
+                elif self.option_selected_new == "FONTE 200A" and i['PRODUTO'] == "FONTE 200A":
+                    return round(i['COLUNA5'], 2);
         elif tipo == "Premium":
-            if self.option_selected == "Storm 40":
-                return 433.00;
-            elif self.option_selected == "Lite 60":
-                return 390.43;
-            elif self.option_selected == "Storm 60":
-                return 473.28;
-            elif self.option_selected == "Lite 70":
-                return 434.42;
-            elif self.option_selected == "Storm 70":
-                return 523.63;
-            elif self.option_selected == "Bob 90":
-                return 443.07;
-            elif self.option_selected == "Bob 120":
-                return 539.74;
-            elif self.option_selected == "Lite 120":
-                return 573.36;
-            elif self.option_selected == "Storm 120":
-                return 674.68;
-            elif self.option_selected == "Bob 200":
-                return 694.82;
-            elif self.option_selected == "Lite 200":
-                return 716.71;
-            elif self.option_selected == "Storm 200 MONO":
-                return 774.88;
-            elif self.option_selected == "Storm 200":
-                return 845.87;
+            for index, i in df.iterrows():
+                if self.option_selected_new == "FONTE 40A" and i['PRODUTO'] == "FONTE 40A":
+                    return round(i['COLUNA7'], 2);
+                elif self.option_selected_new == "FONTE 60A" and i['PRODUTO'] == "FONTE 60A":
+                    return round(i['COLUNA7'], 2);
+                elif self.option_selected_new == "FONTE 60A LITE" and i['PRODUTO'] == "FONTE 60A LITE":
+                    return round(i['COLUNA7'], 2);
+                elif self.option_selected_new == "FONTE 70A" and i['PRODUTO'] == "FONTE 70A":
+                    return round(i['COLUNA7'], 2);
+                elif self.option_selected_new == "FONTE 70A LITE" and i['PRODUTO'] == "FONTE 70A LITE":
+                    return round(i['COLUNA7'], 2);
+                elif self.option_selected_new == "FONTE 90 BOB" and i['PRODUTO'] == "FONTE 90 BOB":
+                    return round(i['COLUNA7'], 2);
+                elif self.option_selected_new == "FONTE 120 BOB" and i['PRODUTO'] == "FONTE 120 BOB":
+                    return round(i['COLUNA7'], 2);
+                elif self.option_selected_new == "FONTE 120A LITE" and i['PRODUTO'] == "FONTE 120A LITE":
+                    return round(i['COLUNA7'], 2);
+                elif self.option_selected_new == "FONTE 120A" and i['PRODUTO'] == "FONTE 120A":
+                    return round(i['COLUNA7'], 2);
+                elif self.option_selected_new == "FONTE 200 BOB" and i['PRODUTO'] == "FONTE 200 BOB":
+                    return round(i['COLUNA7'], 2);
+                elif self.option_selected_new == "FONTE 200A LITE" and i['PRODUTO'] == "FONTE 200A LITE":
+                    return round(i['COLUNA7'], 2);
+                elif self.option_selected_new == "FONTE 200 MONO" and i['PRODUTO'] == "FONTE 200 MONO":
+                    return round(i['COLUNA7'], 2);
+                elif self.option_selected_new == "FONTE 200A" and i['PRODUTO'] == "FONTE 200A":
+                    return round(i['COLUNA7'], 2);
         elif tipo == "NA":
-            if self.option_selected == "Storm 40":
-                return 352.97;
-            elif self.option_selected == "Lite 60":
-                return 321.09;
-            elif self.option_selected == "Storm 60":
-                return 391.13;
-            elif self.option_selected == "Lite 70":
-                return 362.36;
-            elif self.option_selected == "Storm 70":
-                return 438.83;
-            elif self.option_selected == "Bob 90":
-                return 372.05;
-            elif self.option_selected == "Bob 120":
-                return 444.55;
-            elif self.option_selected == "Lite 120":
-                return 484.94;
-            elif self.option_selected == "Storm 120":
-                return 572.39;
-            elif self.option_selected == "Bob 200":
-                return 562.85;
-            elif self.option_selected == "Lite 200":
-                return 624.50;
-            elif self.option_selected == "Storm 200 MONO":
-                return 602.61;
-            elif self.option_selected == "Storm 200":
-                return 734.57;
+            for index, i in df.iterrows():
+                if self.option_selected_new == "FONTE 40A" and i['PRODUTO'] == "FONTE 40A":
+                    return round(i['COLUNA3'], 2);
+                elif self.option_selected_new == "FONTE 60A" and i['PRODUTO'] == "FONTE 60A":
+                    return round(i['COLUNA3'], 2);
+                elif self.option_selected_new == "FONTE 60A LITE" and i['PRODUTO'] == "FONTE 60A LITE":
+                    return round(i['COLUNA3'], 2);
+                elif self.option_selected_new == "FONTE 70A" and i['PRODUTO'] == "FONTE 70A":
+                    return round(i['COLUNA3'], 2);
+                elif self.option_selected_new == "FONTE 70A LITE" and i['PRODUTO'] == "FONTE 70A LITE":
+                    return round(i['COLUNA3'], 2);
+                elif self.option_selected_new == "FONTE 90 BOB" and i['PRODUTO'] == "FONTE 90 BOB":
+                    return round(i['COLUNA3'], 2);
+                elif self.option_selected_new == "FONTE 120 BOB" and i['PRODUTO'] == "FONTE 120 BOB":
+                    return round(i['COLUNA3'], 2);
+                elif self.option_selected_new == "FONTE 120A LITE" and i['PRODUTO'] == "FONTE 120A LITE":
+                    return round(i['COLUNA3'], 2);
+                elif self.option_selected_new == "FONTE 120A" and i['PRODUTO'] == "FONTE 120A":
+                    return round(i['COLUNA3'], 2);
+                elif self.option_selected_new == "FONTE 200 BOB" and i['PRODUTO'] == "FONTE 200 BOB":
+                    return round(i['COLUNA3'], 2);
+                elif self.option_selected_new == "FONTE 200A LITE" and i['PRODUTO'] == "FONTE 200A LITE":
+                    return round(i['COLUNA3'], 2);
+                elif self.option_selected_new == "FONTE 200 MONO" and i['PRODUTO'] == "FONTE 200 MONO":
+                    return round(i['COLUNA3'], 2);
+                elif self.option_selected_new == "FONTE 200A" and i['PRODUTO'] == "FONTE 200A":
+                    return round(i['COLUNA3'], 2);
 
     def parse_location(self, response):
         name = response.meta['name']
@@ -1053,7 +1145,7 @@ class MlSpider(scrapy.Spider):
         lugar = response.xpath('//*[@id="profile"]/div/div[2]/div[1]/div[3]/p/text()').get()
 
 
-        doc.add_paragraph(f'Modelo: {self.option_selected}')
+        doc.add_paragraph(f'Modelo: {self.option_selected_new}')
         doc.add_paragraph(f'URL: {url}')
         doc.add_paragraph(f'Nome: {name}')
         doc.add_paragraph(f'Preço: {new_price_float}')
@@ -1073,7 +1165,7 @@ class MlSpider(scrapy.Spider):
             'tipo': tipo,
             'lugar': lugar
         }
-        doc.save(fr"C:\workspace\mercado-livre\mercadolivre\dados\{self.option_selected}.docx")
+        doc.save(fr"dados/{self.option_selected_new}.docx")
 
         
         
