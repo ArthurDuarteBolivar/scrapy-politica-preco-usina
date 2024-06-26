@@ -9,3 +9,4 @@ requests
 numpy
 pudb
 unidecode
+mysql-connector-python

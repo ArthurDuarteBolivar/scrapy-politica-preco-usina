@@ -1,18 +1,8 @@
-from ultralytics import YOLO
-
-model = YOLO(r"mercadolivre\spiders\best.pt")
-import cv2
 import requests
-import numpy as np
-from io import BytesIO
-import logging
-import pudb
-import time
-# pudb.set_trace()
+import mysql.connector
 import unidecode
 import scrapy
 import requests
-import os
 from docx import Document
 import pandas
 
@@ -110,36 +100,6 @@ def extract_price(response):
 
   return None  
 
-def download_image_from_url(url):
-    response = requests.get(url)
-    img = cv2.imdecode(np.frombuffer(response.content, np.uint8), cv2.IMREAD_COLOR)
-    results = model.predict(img)
-
-    for result in results:
-        probs = result.probs
-        return result.names.get(probs.top1)
-
-def download_image(image_src, download_folder, desired_filename):
-    return
-    # os.makedirs("images", exist_ok=True)  
-    # desired_filename = os.path.join('images', desired_filename + '.png')  # Append .png to the filename
-
-    # response = requests.get(image_src, stream=True)
-
-    # if response.status_code == 200:
-    #     with open(desired_filename, 'wb') as f:
-    #         for chunk in response.iter_content(chunk_size=1024):
-    #             f.write(chunk)
-    #     print("Image downloaded successfully:", desired_filename)
-    #     return desired_filename  # Return the downloaded file path
-    # else:
-    #     print(f"Failed to download image: {response.status_code}")
-    #     return None  # Return None on failure
-
-
-options = ["FONTE 40A"]#, "FONTE 60A" ,"FONTE 60A LITE","FONTE 70A", "FONTE 70A LITE", "FONTE 90 BOB", "FONTE 120A", "FONTE 120A LITE", "FONTE 120 BOB", "FONTE 200A", "FONTE 200 MONO", "FONTE 200 BOB", "FONTE 200A LITE"
-
-
 
 class MlSpider(scrapy.Spider):
     option_selected = ""
@@ -154,23 +114,210 @@ class MlSpider(scrapy.Spider):
     
     
     def parse(self, response, **kwargs):
-        # yield from self.parse_all("FONTE 40A")
-        # yield from self.parse_all("FONTE 60A LITE")
-        # yield from self.parse_all("FONTE 60A")
-        # yield from self.parse_all("FONTE 70A")
-        # yield from self.parse_all("FONTE 70A LITE")
-        # yield from self.parse_all("FONTE 90 BOB")
-        # yield from self.parse_all("FONTE 120A")
-        # yield from self.parse_all("FONTE 120A LITE")
-        # yield from self.parse_all("FONTE 120 BOB")
         yield from self.parse_all(self.palavra)
-        # yield from self.parse_all("FONTE 200 MONO")
-        # yield from self.parse_all("FONTE 200 BOB")
-        # yield from self.parse_all("FONTE 200A LITE")
         
         
-        
-        
+    def parse_catalog(self, search_coming, headers):
+        request = requests.get(
+            f"https://app.nubimetrics.com/api/search/catalogs?order=relevance&search_filters=condition%3Dnew@&seller_id=1242763049&site_id=MLB&to_search={search_coming}&typeFind=q",
+            headers=headers
+        )
+        request.raise_for_status()
+        data = request.json()
+        data = data.get('data', [])
+        for i in data:
+            name = i.get("Name")
+            loja = i.get('BuyBoxWinner', {}).get("Nickname")
+            listing_type = i.get('BuyBoxWinner', {}).get("ListingTypeId")
+            if name and loja and listing_type:
+                new_name = name.lower();
+                new_name = unidecode.unidecode(new_name)
+                if self.option_selected == "FONTE 40A":       
+                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
+                        if "40a" in new_name or "40" in new_name or "40 amperes" in new_name or "40amperes" in new_name or "36a" in new_name or "36" in new_name or "36 amperes" in new_name or "36amperes" in new_name:
+                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
+                            for item in i.get('Sellers', []):
+                                loja = item.get("Nickname")
+                                name = i.get("Name")
+                                listing_type = item.get("ListingTypeId")
+                                if loja and name and listing_type:
+                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
+                                else:
+                                    print("Missing loja or name for item:", i.get("Name"))
+                                
+                elif self.option_selected == "FONTE 60A":
+                       
+                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
+                        if "60a" in new_name or "60" in new_name or "60 amperes" in new_name or "60amperes" in new_name or "60 a" in new_name:
+                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
+                            for item in i.get('Sellers', []):
+                                loja = item.get("Nickname")
+                                name = i.get("Name")
+                                listing_type = item.get("ListingTypeId")
+                                if loja and name and listing_type:
+                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
+                                else:
+                                    print("Missing loja or name for item:", i.get("Name"))
+                            
+                elif self.option_selected == "FONTE 60A LITE":
+                    if "bob" not in new_name and ("lite" in new_name or "light" in new_name) and "controle" not in new_name and 'jfa' in new_name:
+                        if "60a" in new_name or "60" in new_name or "60 amperes" in new_name or "60amperes" in new_name or "60 a" in new_name:
+                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})                                      
+                            for item in i.get('Sellers', []):
+                                loja = item.get("Nickname")
+                                name = i.get("Name")
+                                listing_type = item.get("ListingTypeId")
+                                if loja and name and listing_type:
+                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
+                                else:
+                                    print("Missing loja or name for item:", i.get("Name"))
+                            
+                elif self.option_selected == "FONTE 70A":
+                    
+                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
+                        if "70a" in new_name or "70" in new_name or "70 amperes" in new_name or "70amperes" in new_name or "70 a" in new_name:
+                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
+                            for item in i.get('Sellers', []):
+                                loja = item.get("Nickname")
+                                name = i.get("Name")
+                                listing_type = item.get("ListingTypeId")
+                                if loja and name and listing_type:
+                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
+                                else:
+                                    print("Missing loja or name for item:", i.get("Name"))
+                            
+                            
+                elif self.option_selected == "FONTE 70A LITE":
+                    
+                    if "bob" not in new_name and  ("lite" in new_name or "light" in new_name) and "controle" not in new_name and 'jfa' in new_name:
+                        if "70a" in new_name or "70" in new_name or "70 amperes" in new_name or "70amperes" in new_name or "70 a" in new_name:
+                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
+                            for item in i.get('Sellers', []):
+                                loja = item.get("Nickname")
+                                name = i.get("Name")
+                                listing_type = item.get("ListingTypeId")
+                                if loja and name and listing_type:
+                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
+                                else:
+                                    print("Missing loja or name for item:", i.get("Name"))
+                            
+                            
+                elif self.option_selected == "FONTE 90 BOB":
+                    
+                    if "bob" in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
+                        if "90a" in new_name or "90" in new_name or "90 amperes" in new_name or "90amperes" in new_name or "90 a" in new_name:
+                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
+                            for item in i.get('Sellers', []):
+                                loja = item.get("Nickname")
+                                name = i.get("Name")
+                                listing_type = item.get("ListingTypeId")
+                                if loja and name and listing_type:
+                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
+                                else:
+                                    print("Missing loja or name for item:", i.get("Name"))
+                            
+                            
+                elif self.option_selected == "FONTE 120A":
+                    
+                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
+                        if "120a" in new_name or "120" in new_name or "120 amperes" in new_name or "120amperes" in new_name or "120 a" in new_name:
+                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
+                            for item in i.get('Sellers', []):
+                                loja = item.get("Nickname")
+                                name = i.get("Name")
+                                listing_type = item.get("ListingTypeId")
+                                if loja and name and listing_type:
+                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
+                                else:
+                                    print("Missing loja or name for item:", i.get("Name"))
+                            
+                            
+                elif self.option_selected == "FONTE 120A LITE":
+                    
+                    if "bob" not in new_name and  ("lite" in new_name or "light" in new_name) and "controle" not in new_name and 'jfa' in new_name:
+                        if "120a" in new_name or "120" in new_name or "120 amperes" in new_name or "120amperes" in new_name or "120 a" in new_name:
+                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
+                            for item in i.get('Sellers', []):
+                                loja = item.get("Nickname")
+                                name = i.get("Name")
+                                listing_type = item.get("ListingTypeId")
+                                if loja and name and listing_type:
+                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
+                                else:
+                                    print("Missing loja or name for item:", i.get("Name"))
+                            
+                            
+                elif self.option_selected == "FONTE 120 BOB":
+                    
+                    if "bob" in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
+                        if "120a" in new_name or "120" in new_name or "120 amperes" in new_name or "120amperes" in new_name or "120 a" in new_name:
+                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
+                            for item in i.get('Sellers', []):
+                                loja = item.get("Nickname")
+                                name = i.get("Name")
+                                listing_type = item.get("ListingTypeId")
+                                if loja and name and listing_type:
+                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
+                                else:
+                                    print("Missing loja or name for item:", i.get("Name"))
+                            
+                            
+                elif self.option_selected == "FONTE 200A":
+                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name and 'mono' not in new_name and 'mono' not in new_name and 'monovolt' not in new_name and '220v' not in new_name:
+                        if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name or "200 a" in new_name:
+                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
+                            for item in i.get('Sellers', []):
+                                loja = item.get("Nickname")
+                                name = i.get("Name")
+                                listing_type = item.get("ListingTypeId")
+                                if loja and name and listing_type:
+                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
+                                else:
+                                    print("Missing loja or name for item:", i.get("Name"))
+                            
+                            
+                elif self.option_selected == "FONTE 200 MONO":
+                    
+                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name and ("mono" in new_name or "220v" in new_name or "monovolt" in new_name):
+                        if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name or "200 a" in new_name:
+                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
+                            for item in i.get('Sellers', []):
+                                loja = item.get("Nickname")
+                                name = i.get("Name")
+                                listing_type = item.get("ListingTypeId")
+                                if loja and name and listing_type:
+                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
+                                else:
+                                    print("Missing loja or name for item:", i.get("Name"))
+                            
+                            
+                elif self.option_selected == "FONTE 200A LITE":
+                    if "bob" not in new_name and  ("lite" in new_name or "light" in new_name) and "controle" not in new_name and 'jfa' in new_name and 'mono' not in new_name and 'monovolt' not in new_name and '220v' not in new_name:
+                        if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name or "200 a" in new_name:
+                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
+                            for item in i.get('Sellers', []):
+                                loja = item.get("Nickname")
+                                name = i.get("Name")
+                                listing_type = item.get("ListingTypeId")
+                                if loja and name and listing_type:
+                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
+                                else:
+                                    print("Missing loja or name for item:", i.get("Name"))
+                            
+                            
+                elif self.option_selected == "FONTE 200 BOB":
+                    if "bob" in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name and 'mono' not in new_name and 'mono' not in new_name and 'monovolt' not in new_name and '220v' not in new_name:
+                        if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name or "200 a" in new_name:
+                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
+                            for item in i.get('Sellers', []):
+                                loja = item.get("Nickname")
+                                name = i.get("Name")
+                                listing_type = item.get("ListingTypeId")
+                                if loja and name and listing_type:
+                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
+                                else:
+                                    print("Missing loja or name for item:", i.get("Name"))
+    
     def parse_all(self, option_function):
         self.option_selected = option_function
         self.option_selected_new = option_function
@@ -202,7 +349,36 @@ class MlSpider(scrapy.Spider):
         elif self.option_selected == "FONTE 200 MONO":
             search = "fonte storm 200a mono"
         search = search.replace(" ", "%20")
-        # search = "fonte%2040a%20jfa"
+        
+        search_catalog = ""
+        if self.option_selected == "FONTE 40A":
+            search_catalog = "fonte 40a"
+        if self.option_selected == "FONTE 60A LITE":
+            search_catalog = "fonte 60a"
+        elif self.option_selected == "FONTE 60A":
+            search_catalog = "fonte 60a"
+        if self.option_selected == "FONTE 70A LITE":
+            search_catalog = "fonte 70a"
+        elif self.option_selected == "FONTE 70A":
+            search_catalog = "fonte 70a"
+        elif self.option_selected == "FONTE 90 BOB":
+            search_catalog = "fonte 90a"
+        elif self.option_selected == "FONTE 120A":
+            search_catalog = "fonte 120a"
+        elif self.option_selected == "FONTE 120A LITE":
+            search_catalog = "fonte 120a"
+        elif self.option_selected == "FONTE 120 BOB":
+            search_catalog = "fonte 120a"
+        elif self.option_selected == "FONTE 200A":
+            search_catalog = "fonte 200a"
+        elif self.option_selected == "FONTE 200A LITE":
+            search_catalog = "fonte 200a"
+        elif self.option_selected == "FONTE 200 BOB":
+            search_catalog = "fonte 200a"
+        elif self.option_selected == "FONTE 200 MONO":
+            search_catalog = "fonte 200a mono"
+        search_catalog = search_catalog.replace(" ", "%20")
+        
         headers = {
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
             "Accept-Encoding": "gzip, deflate, br",
@@ -221,6 +397,9 @@ class MlSpider(scrapy.Spider):
             "sec-ch-ua-mobile": "?0",
             "sec-ch-ua-platform": "\"Windows\""
         }
+        
+        yield from self.parse_catalog(search_catalog, headers)
+                
         
         request = requests.get(
             f"https://app.nubimetrics.com/api/search/items?attributes=results,available_filters,paging,filters&buying_mode=buy_it_now&exportData=false&isControlPrice=false&language=pt_BR&limit=200&offset=0&order=price_asc&pvp=0&search_filters=condition%3Dnew@&seller_id=1242763049&site_id=MLB&to_search={search}&typeSearch=q",
@@ -251,16 +430,10 @@ class MlSpider(scrapy.Spider):
                 name = item.get('title')
                 id = item.get('id')
                 permalink = item.get("permalink");
-                # url = "https://produto.mercadolivre.com.br/MLB-" + id.replace("MLB", "")
                 if "/p/" in permalink:
                     url = permalink + f"?pdp_filters=item_id:{id}"
                 else:
                     url = permalink
-                # if id != "MLB3348494984":
-                #     continue
-                # else:
-                #     print(item.get("permalink"))
-                    # url = "https://www.mercadolivre.com.br/fonte-carregador-jfa-bob-storm-90a-bivolt-automatico-cor-preto/p/MLB21562641?pdp_filters=item_id:MLB4448891798"
                 listing_type = item.get('listing_type_id')
                 loja = item.get('sellernickname')
                 price = item.get('price')
@@ -404,7 +577,7 @@ class MlSpider(scrapy.Spider):
                             
                             
                 elif self.option_selected == "FONTE 200A LITE":
-                    if "bob" not in new_name and  ("lite" in new_name or "light" in new_name) and "controle" not in new_name and 'jfa' in new_name:
+                    if "bob" not in new_name and  ("lite" in new_name or "light" in new_name) and "controle" not in new_name and 'jfa' in new_name and 'mono' not in new_name and 'monovolt' not in new_name and '220v' not in new_name:
                         if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name or "200 a" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-200a-lite-jfa_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
@@ -431,30 +604,11 @@ class MlSpider(scrapy.Spider):
         name = response.meta['name']
         loja = response.meta['loja']
         listing_type = response.meta['listing_type']
-        # price = response.meta['price']
+
         self.option_selected_new = self.option_selected
-        # id_anuncio = response.xpath('//*[@id="denounce"]/div/p/span/text()').get().replace("#", "")
-        # imagem = response.xpath('//*[@id="gallery"]/div/div/span[2]/figure/img/@data-zoom').get()
-        # if imagem == None:
-        #     imagem = response.xpath('//*[@id="gallery"]/div/div[1]/span[1]/figure/img/@data-zoom').get()
-        # if imagem == None:
-        #     imagem = response.xpath('//*[@id="ui-pdp-main-container"]/div[1]/div/div[1]/div[1]/div/div/div/span[1]/figure/img/@data-zoom').get()
-        # if imagem == None:
-        #     imagem = response.xpath('//*[@id="gallery"]/div/div[1]/span[2]/figure/img/@data-zoom').get()
-        # if imagem == None:
-        #     imagem = response.xpath('//*[@id="gallery"]/div/div[1]/span[3]/figure/img/@data-zoom').get()
-        # if imagem == None:
-        #     imagem = response.xpath('//*[@id="gallery"]/div/div/span[1]/figure/img/@data-zoom').get()
-        # if self.option_selected_new == "FONTE 200A LITE" or self.option_selected_new == "FONTE 200A" or self.option_selected_new == "FONTE 200 BOB":
-        #     predict = download_image_from_url(imagem)
-        #     if predict == "lite":
-        #         self.option_selected_new = "FONTE 200A LITE"
-        #     elif predict == "bob":
-        #         self.option_selected_new = "FONTE 200 BOB"
-        #     elif predict == "storm":
-        #         self.option_selected_new = "FONTE 200A"
         price = extract_price(response)
-        
+        if not price:
+            return        
         new_price_float = price
            
         

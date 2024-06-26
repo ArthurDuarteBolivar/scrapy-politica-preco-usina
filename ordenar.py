@@ -172,7 +172,7 @@ for item in lite120:
 for item in storm120:
     if item[1] not in lojas:
         lojas[item[1]] = []
-    lojas[item[1]].append((item[0], "FONTE 120"))
+    lojas[item[1]].append((item[0], "FONTE 120A"))
 for item in bob200:
     if item[1] not in lojas:
         lojas[item[1]] = []
