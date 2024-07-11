@@ -16,59 +16,99 @@ df = pandas.read_excel("GESTÃO DE AÇÕES E-COMMERCE.xlsx", usecols='C:K', skip
 df.columns = ['PRODUTO', 'SITE', 'COLUNA3', 'CLÁSSICO ML', 'COLUNA5', 'PREMIUM ML', 'COLUNA7', 'MARKETPLACES', 'COLUNA9']
 
 
-for index, i in df.iterrows():
-    if i['PRODUTO'] == "FONTE 40A":
-        fonte40Marketplace = round(i['COLUNA3'], 2);
-        fonte40Classico = round(i['COLUNA5'], 2);
-        fonte40Premium = round(i['COLUNA7'], 2);
-    elif i['PRODUTO'] == "FONTE 60A":
-        fonte60Marketplace = round(i['COLUNA3'], 2);
-        fonte60Classico = round(i['COLUNA5'], 2);
-        fonte60Premium = round(i['COLUNA7'], 2);
-    elif i['PRODUTO'] == "FONTE 60A LITE":
-        fonte60liteMarketplace = round(i['COLUNA3'], 2);
-        fonte60liteClassico = round(i['COLUNA5'], 2);
-        fonte60litePremium = round(i['COLUNA7'], 2);
-    elif i['PRODUTO'] == "FONTE 70A":
-        fonte70Marketplace = round(i['COLUNA3'], 2);
-        fonte70Classico = round(i['COLUNA5'], 2);
-        fonte70Premium = round(i['COLUNA7'], 2);
-    elif i['PRODUTO'] == "FONTE 70A LITE":
-        fonte70liteMarketplace = round(i['COLUNA3'], 2);
-        fonte70liteClassico = round(i['COLUNA5'], 2);
-        fonte70litePremium = round(i['COLUNA7'], 2);
-    elif i['PRODUTO'] == "FONTE 90 BOB":
-        fonte90bobMarketplace = round(i['COLUNA3'], 2);
-        fonte90bobClassico = round(i['COLUNA5'], 2);
-        fonte90bobPremium = round(i['COLUNA7'], 2);
-    elif i['PRODUTO'] == "FONTE 120 BOB":
-        fonte120bobMarketplace = round(i['COLUNA3'], 2);
-        fonte120bobClassico = round(i['COLUNA5'], 2);
-        fonte120bobPremium = round(i['COLUNA7'], 2);
-    elif i['PRODUTO'] == "FONTE 120A LITE":
-        fonte120liteMarketplace = round(i['COLUNA3'], 2);
-        fonte120liteClassico = round(i['COLUNA5'], 2);
-        fonte120litePremium = round(i['COLUNA7'], 2);
-    elif i['PRODUTO'] == "FONTE 120A":
-        fonte120Marketplace = round(i['COLUNA3'], 2);
-        fonte120Classico = round(i['COLUNA5'], 2);
-        fonte120Premium = round(i['COLUNA7'], 2);
-    elif i['PRODUTO'] == "FONTE 200 BOB":
-        fonte200bobMarketplace = round(i['COLUNA3'], 2);
-        fonte200bobClassico = round(i['COLUNA5'], 2);
-        fonte200bobPremium = round(i['COLUNA7'], 2);
-    elif i['PRODUTO'] == "FONTE 200A LITE":
-        fonte200liteMarketplace = round(i['COLUNA3'], 2);
-        fonte200liteClassico = round(i['COLUNA5'], 2);
-        fonte200litePremium = round(i['COLUNA7'], 2);
-    elif i['PRODUTO'] == "FONTE 200 MONO":
-        fonte200monoMarketplace = round(i['COLUNA3'], 2);
-        fonte200monoClassico = round(i['COLUNA5'], 2);
-        fonte200monoPremium = round(i['COLUNA7'], 2);
-    elif i['PRODUTO'] == "FONTE 200A":
-        fonte200Marketplace = round(i['COLUNA3'], 2);
-        fonte200Classico = round(i['COLUNA5'], 2);
-        fonte200Premium = round(i['COLUNA7'], 2);
+fonteBob60Marketplace = 341.00;
+fonteBob60Classico = 372.00;
+fonteBob60Premium = 402.00;
+
+fonteBob120Marketplace = 462.00;
+fonteBob120Classico = 502.00;
+fonteBob120Premium = 543.00;
+
+fonteBob200Marketplace = 593.00;
+fonteBob200Classico = 634.00;
+fonteBob200Premium = 674.00;
+
+
+fonteBaterryMeter50Marketplace = 412.00;
+fonteBaterryMeter50Classico = 442.00;
+fonteBaterryMeter50Premium = 472.00;
+
+fonteBaterryMeter70Marketplace = 442.00;
+fonteBaterryMeter70Classico = 473.00;
+fonteBaterryMeter70Premium = 502.00;
+
+fonteBaterryMeter100Marketplace = 523.00;
+fonteBaterryMeter100Classico = 563.00;
+fonteBaterryMeter100Premium = 603.00;
+
+fonteBaterryMeter120Marketplace = 583.00;
+fonteBaterryMeter120Classico = 623.00;
+fonteBaterryMeter120Premium = 664.00;
+
+fonteSmart50Marketplace = 442.00;
+fonteSmart50Classico = 473.00;
+fonteSmart50Premium = 502.00;
+
+fonteSmart70Marketplace = 473.00;
+fonteSmart70Classico = 502.00;
+fonteSmart70Premium = 532.00;
+
+fonteSmart100Marketplace = 553.00;
+fonteSmart100Classico = 593.00;
+fonteSmart100Premium = 633.00;
+
+fonteSmart120Marketplace = 614.00;
+fonteSmart120Classico = 654.00;
+fonteSmart120Premium = 693.00;
+
+fonteSmart160Marketplace = 755.00;
+fonteSmart160Classico = 794.00;
+fonteSmart160Premium = 834.00;
+
+fonteSmart200MonoMarketplace = 745.00;
+fonteSmart200MonoClassico = 784.00;
+fonteSmart200MonoPremium = 825.00;
+
+fonteSmart200Marketplace = 775.00;
+fonteSmart200Classico = 814.00;
+fonteSmart200Premium = 854.00;
+
+fonteHeavyDuty220Marketplace = 865.00;
+fonteHeavyDuty220Classico = 905.00;
+fonteHeavyDuty220Premium = 946.00;
+
+fonte30Marketplace = 582.00;
+fonte30Classico = 624.00;
+fonte30Premium = 664.00;
+
+fonte70Marketplace = 753.00;
+fonte70Classico = 805.00;
+fonte70Premium = 854.00;
+
+fonte100Marketplace = 924.00;
+fonte100Classico = 986.00;
+fonte100Premium = 1046.00;
+
+ConversorDeTensao30AMarketplace = 411.00;
+ConversorDeTensao30AClassico = 452.00;
+ConversorDeTensao30APremium = 492.00;
+
+ConversorDeTensao60AMarketplace = 764.00;
+ConversorDeTensao60AClassico = 805.00;
+ConversorDeTensao60APremium = 854.00;
+
+ConversorDeTensao120AMarketplace = 995.00;
+ConversorDeTensao120AClassico = 1036.00;
+ConversorDeTensao120APremium = 1127.00;
+
+ConversorDeTensao240AMarketplace = 1711.00;
+ConversorDeTensao240AClassico = 1761.00;
+ConversorDeTensao240APremium = 1912.00;
+
+CarregadorDeBateriasCharger60AMarketplace = 643.00;
+CarregadorDeBateriasCharger60AClassico = 673.00;
+CarregadorDeBateriasCharger60APremium = 734.00;
+
 
 # if os.path.exists("dados_scrapy.docx"):
 #     doc = Document("dados_scrapy.docx")
@@ -144,238 +184,64 @@ class MlSpider(scrapy.Spider):
                                     yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
                                 else:
                                     print("Missing loja or name for item:", i.get("Name"))
-                                
-                elif self.option_selected == "FONTE 60A":
-                       
-                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
-                        if "60a" in new_name or "60" in new_name or "60 amperes" in new_name or "60amperes" in new_name or "60 a" in new_name:
-                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
-                            for item in i.get('Sellers', []):
-                                loja = item.get("Nickname")
-                                name = i.get("Name")
-                                listing_type = item.get("ListingTypeId")
-                                if loja and name and listing_type:
-                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
-                                else:
-                                    print("Missing loja or name for item:", i.get("Name"))
-                            
-                elif self.option_selected == "FONTE 60A LITE":
-                    if "bob" not in new_name and ("lite" in new_name or "light" in new_name) and "controle" not in new_name and 'jfa' in new_name:
-                        if "60a" in new_name or "60" in new_name or "60 amperes" in new_name or "60amperes" in new_name or "60 a" in new_name:
-                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})                                      
-                            for item in i.get('Sellers', []):
-                                loja = item.get("Nickname")
-                                name = i.get("Name")
-                                listing_type = item.get("ListingTypeId")
-                                if loja and name and listing_type:
-                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
-                                else:
-                                    print("Missing loja or name for item:", i.get("Name"))
-                            
-                elif self.option_selected == "FONTE 70A":
-                    
-                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
-                        if "70a" in new_name or "70" in new_name or "70 amperes" in new_name or "70amperes" in new_name or "70 a" in new_name:
-                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
-                            for item in i.get('Sellers', []):
-                                loja = item.get("Nickname")
-                                name = i.get("Name")
-                                listing_type = item.get("ListingTypeId")
-                                if loja and name and listing_type:
-                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
-                                else:
-                                    print("Missing loja or name for item:", i.get("Name"))
-                            
-                            
-                elif self.option_selected == "FONTE 70A LITE":
-                    
-                    if "bob" not in new_name and  ("lite" in new_name or "light" in new_name) and "controle" not in new_name and 'jfa' in new_name:
-                        if "70a" in new_name or "70" in new_name or "70 amperes" in new_name or "70amperes" in new_name or "70 a" in new_name:
-                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
-                            for item in i.get('Sellers', []):
-                                loja = item.get("Nickname")
-                                name = i.get("Name")
-                                listing_type = item.get("ListingTypeId")
-                                if loja and name and listing_type:
-                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
-                                else:
-                                    print("Missing loja or name for item:", i.get("Name"))
-                            
-                            
-                elif self.option_selected == "FONTE 90 BOB":
-                    
-                    if "bob" in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
-                        if "90a" in new_name or "90" in new_name or "90 amperes" in new_name or "90amperes" in new_name or "90 a" in new_name:
-                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
-                            for item in i.get('Sellers', []):
-                                loja = item.get("Nickname")
-                                name = i.get("Name")
-                                listing_type = item.get("ListingTypeId")
-                                if loja and name and listing_type:
-                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
-                                else:
-                                    print("Missing loja or name for item:", i.get("Name"))
-                            
-                            
-                elif self.option_selected == "FONTE 120A":
-                    
-                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
-                        if "120a" in new_name or "120" in new_name or "120 amperes" in new_name or "120amperes" in new_name or "120 a" in new_name:
-                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
-                            for item in i.get('Sellers', []):
-                                loja = item.get("Nickname")
-                                name = i.get("Name")
-                                listing_type = item.get("ListingTypeId")
-                                if loja and name and listing_type:
-                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
-                                else:
-                                    print("Missing loja or name for item:", i.get("Name"))
-                            
-                            
-                elif self.option_selected == "FONTE 120A LITE":
-                    
-                    if "bob" not in new_name and  ("lite" in new_name or "light" in new_name) and "controle" not in new_name and 'jfa' in new_name:
-                        if "120a" in new_name or "120" in new_name or "120 amperes" in new_name or "120amperes" in new_name or "120 a" in new_name:
-                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
-                            for item in i.get('Sellers', []):
-                                loja = item.get("Nickname")
-                                name = i.get("Name")
-                                listing_type = item.get("ListingTypeId")
-                                if loja and name and listing_type:
-                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
-                                else:
-                                    print("Missing loja or name for item:", i.get("Name"))
-                            
-                            
-                elif self.option_selected == "FONTE 120 BOB":
-                    
-                    if "bob" in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
-                        if "120a" in new_name or "120" in new_name or "120 amperes" in new_name or "120amperes" in new_name or "120 a" in new_name:
-                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
-                            for item in i.get('Sellers', []):
-                                loja = item.get("Nickname")
-                                name = i.get("Name")
-                                listing_type = item.get("ListingTypeId")
-                                if loja and name and listing_type:
-                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
-                                else:
-                                    print("Missing loja or name for item:", i.get("Name"))
-                            
-                            
-                elif self.option_selected == "FONTE 200A":
-                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name and 'mono' not in new_name and 'mono' not in new_name and 'monovolt' not in new_name:
-                        if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name or "200 a" in new_name:
-                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
-                            for item in i.get('Sellers', []):
-                                loja = item.get("Nickname")
-                                name = i.get("Name")
-                                listing_type = item.get("ListingTypeId")
-                                if loja and name and listing_type:
-                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
-                                else:
-                                    print("Missing loja or name for item:", i.get("Name"))
-                            
-                            
-                elif self.option_selected == "FONTE 200 MONO":
-                    
-                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name and ("mono" in new_name or "220v" in new_name or "monovolt" in new_name):
-                        if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name or "200 a" in new_name:
-                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
-                            for item in i.get('Sellers', []):
-                                loja = item.get("Nickname")
-                                name = i.get("Name")
-                                listing_type = item.get("ListingTypeId")
-                                if loja and name and listing_type:
-                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
-                                else:
-                                    print("Missing loja or name for item:", i.get("Name"))
-                            
-                            
-                elif self.option_selected == "FONTE 200A LITE":
-                    if "bob" not in new_name and  ("lite" in new_name or "light" in new_name) and "controle" not in new_name and 'jfa' in new_name and 'mono' not in new_name and 'monovolt' not in new_name:
-                        if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name or "200 a" in new_name:
-                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
-                            for item in i.get('Sellers', []):
-                                loja = item.get("Nickname")
-                                name = i.get("Name")
-                                listing_type = item.get("ListingTypeId")
-                                if loja and name and listing_type:
-                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
-                                else:
-                                    print("Missing loja or name for item:", i.get("Name"))
-                            
-                            
-                elif self.option_selected == "FONTE 200 BOB":
-                    if "bob" in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name and 'mono' not in new_name and 'mono' not in new_name and 'monovolt' not in new_name:
-                        if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name or "200 a" in new_name:
-                            yield scrapy.Request(url=i.get('Permalink'), callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})          
-                            for item in i.get('Sellers', []):
-                                loja = item.get("Nickname")
-                                name = i.get("Name")
-                                listing_type = item.get("ListingTypeId")
-                                if loja and name and listing_type:
-                                    yield scrapy.Request(url=f'{i.get('Permalink')}?pdp_filters=item_id:{item.get('ItemId')}', callback=self.parse_product, meta={'name': name, 'loja': loja, 'listing_type': listing_type})
-                                else:
-                                    print("Missing loja or name for item:", i.get("Name"))
     
     def parse_all(self, option_function):
         self.option_selected = option_function
         self.option_selected_new = option_function
         search = ""
-        if self.option_selected == "FONTE 40A":
-            search = "fonte storm 40a"
-        if self.option_selected == "FONTE 60A LITE":
-            search = "fonte lite 60a"
-        elif self.option_selected == "FONTE 60A":
-            search = "fonte storm 60a"
-        if self.option_selected == "FONTE 70A LITE":
-            search = "fonte lite 70a"
-        elif self.option_selected == "FONTE 70A":
-            search = "fonte storm 70a"
-        elif self.option_selected == "FONTE 90 BOB":
-            search = "fonte bob 90a"
-        elif self.option_selected == "FONTE 120A":
-            search = "fonte storm 120a"
-        elif self.option_selected == "FONTE 120A LITE":
-            search = "fonte lite 120a"
-        elif self.option_selected == "FONTE 120 BOB":
-            search = "fonte bob 120a"
-        elif self.option_selected == "FONTE 200A":
-            search = "fonte storm 200a"
-        elif self.option_selected == "FONTE 200A LITE":
-            search = "fonte lite 200a"
-        elif self.option_selected == "FONTE 200 BOB":
-            search = "fonte bob 200a"
-        elif self.option_selected == "FONTE 200 MONO":
-            search = "fonte storm 200a mono"
+        if self.option_selected == "Fonte Usina Bob 60A":
+            search = "Fonte Usina Bob 60A"
+        if self.option_selected == "Fonte Usina Bob 120A":
+            search = "Fonte Usina Bob 120A"
+        elif self.option_selected == "Fonte Usina Bob 200A":
+            search = "Fonte Usina Bob 200A"
+        elif self.option_selected == "Fonte Usina Battery Meter 50A":
+            search = "Fonte Usina Battery Meter 50A"
+        elif self.option_selected == "Fonte Usina Battery Meter 70A":
+            search = "Fonte Usina Battery Meter 70A"
+        elif self.option_selected == "Fonte Usina Battery Meter 100A":
+            search = "Fonte Usina Battery Meter 100A"
+        elif self.option_selected == "Fonte Usina Battery Meter 120A":
+            search = "Fonte Usina Battery Meter 120A"
+        elif self.option_selected == "Fonte Usina Smart 50A":
+            search = "Fonte Usina Smart 50A"
+        elif self.option_selected == "Fonte Usina Smart 70A":
+            search = "Fonte Usina Smart 70A"
+        elif self.option_selected == "Fonte Usina Smart 100A":
+            search = "Fonte Usina Smart 100A"
+        elif self.option_selected == "Fonte Usina Smart 120A":
+            search = "Fonte Usina Smart 120A"
+        elif self.option_selected == "Fonte Usina Smart 160A":
+            search = "Fonte Usina Smart 160A"
+        elif self.option_selected == "Fonte Usina Smart 200A MONO":
+            search = "Fonte Usina Smart 200A mono"
+        elif self.option_selected == "Fonte Usina Smart 200A":
+            search = "Fonte Usina Smart 200A"
+        elif self.option_selected == "Fonte Usina 220A":
+            search = "Fonte Usina 220A"
+        elif self.option_selected == "Fonte Usina 30A":
+            search = "Fonte Usina 30A"
+        elif self.option_selected == "Fonte Usina 70A":
+            search = "Fonte Usina 70A"
+        elif self.option_selected == "Fonte Usina 100A":
+            search = "Fonte Usina 100A"
+        elif self.option_selected == "Conversor de Tensao 30A":
+            search = "Conversor+de+Tensao+Usina+30A"
+        elif self.option_selected == "Conversor de Tensao 60A":
+            search = "Conversor+de+Tensao+Usina+60A"
+        elif self.option_selected == "Conversor de Tensao 120A":
+            search = "Conversor+de+Tensao+Usina+120A"
+        elif self.option_selected == "Conversor de Tensao 240A":
+            search = "Conversor+de+Tensao+Usina+240A"
+        elif self.option_selected == "Carregador de Baterias Charger 60A":
+            search = "Carregador+de+Baterias+Charger+Usina+60A"
+
+
+        search = search.lower()
         search = search.replace(" ", "%20")
         
         search_catalog = ""
-        if self.option_selected == "FONTE 40A":
-            search_catalog = "fonte 40a"
-        if self.option_selected == "FONTE 60A LITE":
-            search_catalog = "fonte 60a"
-        elif self.option_selected == "FONTE 60A":
-            search_catalog = "fonte 60a"
-        if self.option_selected == "FONTE 70A LITE":
-            search_catalog = "fonte 70a"
-        elif self.option_selected == "FONTE 70A":
-            search_catalog = "fonte 70a"
-        elif self.option_selected == "FONTE 90 BOB":
-            search_catalog = "fonte 90a"
-        elif self.option_selected == "FONTE 120A":
-            search_catalog = "fonte 120a"
-        elif self.option_selected == "FONTE 120A LITE":
-            search_catalog = "fonte 120a"
-        elif self.option_selected == "FONTE 120 BOB":
-            search_catalog = "fonte 120a"
-        elif self.option_selected == "FONTE 200A":
-            search_catalog = "fonte 200a"
-        elif self.option_selected == "FONTE 200A LITE":
-            search_catalog = "fonte 200a"
-        elif self.option_selected == "FONTE 200 BOB":
-            search_catalog = "fonte 200a"
-        elif self.option_selected == "FONTE 200 MONO":
+        if self.option_selected == "FONTE 200 MONO":
             search_catalog = "fonte 200a mono"
         search_catalog = search_catalog.replace(" ", "%20")
         
@@ -398,7 +264,7 @@ class MlSpider(scrapy.Spider):
             "sec-ch-ua-platform": "\"Windows\""
         }
         
-        yield from self.parse_catalog(search_catalog, headers)
+        # yield from self.parse_catalog(search_catalog, headers)
                 
         
         request = requests.get(
@@ -439,166 +305,236 @@ class MlSpider(scrapy.Spider):
                 price = item.get('price')
                 new_name = name.lower();
                 new_name = unidecode.unidecode(new_name)
-                if self.option_selected == "FONTE 40A":       
-                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
-                        if "40a" in new_name or "40" in new_name or "40 amperes" in new_name or "40amperes" in new_name or "36a" in new_name or "36" in new_name or "36 amperes" in new_name or "36amperes" in new_name:
+                if self.option_selected == "Fonte Usina Bob 60A":       
+                    if "bob" in new_name and "usina" in new_name and "smart" not in new_name and "samrt" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name:
+                        if "60a" in new_name or "60" in new_name or "60 amperes" in new_name or "60amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
-                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-40a-jfa_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-jfa-40a_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-jfa-40a_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-jfa-40a_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-jfa-40a_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
-                            
-                elif self.option_selected == "FONTE 60A":
-                       
-                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
-                        if "60a" in new_name or "60" in new_name or "60 amperes" in new_name or "60amperes" in new_name or "60 a" in new_name:
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-60a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-60a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-60a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-60a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-60a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
+
+                if self.option_selected == "Fonte Usina Bob 120A":       
+                    if "bob" in new_name and "usina" in new_name and "smart" not in new_name and "samrt" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name:
+                        if "120a" in new_name or "120" in new_name or "120 amperes" in new_name or "120amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
-                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-60a-jfa_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-jfa-60a_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-jfa-60a_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-jfa-60a_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-jfa-60a_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
-
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-120a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-120a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-120a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-120a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-120a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
-                elif self.option_selected == "FONTE 60A LITE":
-                    if "bob" not in new_name and ("lite" in new_name or "light" in new_name) and "controle" not in new_name and 'jfa' in new_name:
-                        if "60a" in new_name or "60" in new_name or "60 amperes" in new_name or "60amperes" in new_name or "60 a" in new_name:
+                if self.option_selected == "Fonte Usina Bob 200A":       
+                    if "bob" in new_name and "usina" in new_name and "smart" not in new_name and "samrt" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name and "12v" in new_name:
+                        if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
-                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-60a-lite-jfa_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-jfa-60a-lite_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-jfa-60a-lite_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-jfa-60a-lite_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-jfa-60a-lite_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
-
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-200a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-200a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-200a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-200a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-200a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
-                elif self.option_selected == "FONTE 70A":
-                    
-                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
-                        if "70a" in new_name or "70" in new_name or "70 amperes" in new_name or "70amperes" in new_name or "70 a" in new_name:
+                if self.option_selected == "Fonte Usina Battery Meter 50A":       
+                    if "usina" in new_name and "battery" in new_name and "meter" in new_name and "bob" not in new_name and "12v" in new_name:
+                        if "50a" in new_name or "50" in new_name or "50 amperes" in new_name or "50amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
-                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-70a-jfa_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-jfa-70a_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-jfa-70a_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-jfa-70a_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-jfa-70a_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
-
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-50a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-50a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-50a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-50a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-50a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
-                            
-                elif self.option_selected == "FONTE 70A LITE":
-                    
-                    if "bob" not in new_name and  ("lite" in new_name or "light" in new_name) and "controle" not in new_name and 'jfa' in new_name:
-                        if "70a" in new_name or "70" in new_name or "70 amperes" in new_name or "70amperes" in new_name or "70 a" in new_name:
+                if self.option_selected == "Fonte Usina Battery Meter 70A":       
+                    if "usina" in new_name and "battery" in new_name and "meter" in new_name and "bob" not in new_name and "12v" in new_name:
+                        if "50a" in new_name or "50" in new_name or "50 amperes" in new_name or "50amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
-                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-70a-lite-jfa_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-jfa-70a-lite_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-jfa-70a-lite_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-jfa-70a-lite_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-jfa-70a-lite_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
-
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-50a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-50a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-50a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-50a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-50a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
-                            
-                elif self.option_selected == "FONTE 90 BOB":
-                    
-                    if "bob" in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
-                        if "90a" in new_name or "90" in new_name or "90 amperes" in new_name or "90amperes" in new_name or "90 a" in new_name:
+                if self.option_selected == "Fonte Usina Battery Meter 100A":       
+                    if "usina" in new_name and "battery" in new_name and "meter" in new_name and "bob" not in new_name and "12v" in new_name:
+                        if "100a" in new_name or "100" in new_name or "100 amperes" in new_name or "100amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
-                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-90a-bob-jfa_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-jfa-90a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-jfa-90a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-jfa-90a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-jfa-90a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
-
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-100a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-100a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-100a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-100a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-100a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
-                            
-                elif self.option_selected == "FONTE 120A":
-                    
-                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
-                        if "120a" in new_name or "120" in new_name or "120 amperes" in new_name or "120amperes" in new_name or "120 a" in new_name:
-                            yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price,'listing_type': listing_type})
-                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-120a-jfa_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-jfa-120a_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-jfa-120a_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-jfa-120a_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-jfa-120a_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
-
-                            
-                            
-                elif self.option_selected == "FONTE 120A LITE":
-                    
-                    if "bob" not in new_name and  ("lite" in new_name or "light" in new_name) and "controle" not in new_name and 'jfa' in new_name:
-                        if "120a" in new_name or "120" in new_name or "120 amperes" in new_name or "120amperes" in new_name or "120 a" in new_name:
+                if self.option_selected == "Fonte Usina Battery Meter 120A":       
+                    if "usina" in new_name and "battery" in new_name and "meter" in new_name and "bob" not in new_name and "12v" in new_name:
+                        if "120a" in new_name or "120" in new_name or "120 amperes" in new_name or "120amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
-                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-120a-lite-jfa_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-jfa-120a-lite_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-jfa-120a-lite_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-jfa-120a-lite_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-jfa-120a-lite_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
-
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-120a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-120a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-120a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-120a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-120a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
-                            
-                elif self.option_selected == "FONTE 120 BOB":
-                    
-                    if "bob" in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name:
-                        if "120a" in new_name or "120" in new_name or "120 amperes" in new_name or "120amperes" in new_name or "120 a" in new_name:
-                            yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price,'listing_type': listing_type})
-                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-120a-bob-jfa_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-jfa-120a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-jfa-120a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-jfa-120a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-jfa-120a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
-
-                            
-                            
-                elif self.option_selected == "FONTE 200A":
-                    
-                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name and 'mono' not in new_name and 'mono' not in new_name and 'monovolt' not in new_name:
-                        if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name or "200 a" in new_name:
+                if self.option_selected == "Fonte Usina Smart 50A":       
+                    if "usina" in new_name and ("smart" in new_name or "samrt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name:
+                        if "50a" in new_name or "50" in new_name or "50 amperes" in new_name or "50amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
-                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-200a-jfa_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-jfa-200a_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-jfa-200a_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-jfa-200a_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-jfa-200a_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
-
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-50a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-50a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-50a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-50a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-50a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
-                            
-                elif self.option_selected == "FONTE 200 MONO":
-                    
-                    if "bob" not in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name and ("mono" in new_name or "220v" in new_name or "monovolt" in new_name):
-                        if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name or "200 a" in new_name:
-                            yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price,'listing_type': listing_type})
-                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-200a-mono-jfa_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-jfa-200a-mono_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-jfa-200a-mono_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-jfa-200a-mono_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-jfa-200a-mono_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
-
-                            
-                            
-                elif self.option_selected == "FONTE 200A LITE":
-                    if "bob" not in new_name and  ("lite" in new_name or "light" in new_name) and "controle" not in new_name and 'jfa' in new_name and 'mono' not in new_name and 'monovolt' not in new_name:
-                        if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name or "200 a" in new_name:
+                if self.option_selected == "Fonte Usina Smart 70A":       
+                    if "usina" in new_name and ("smart" in new_name or "samrt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name:
+                        if "70a" in new_name or "70" in new_name or "70 amperes" in new_name or "70amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
-                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-200a-lite-jfa_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-jfa-200a-lite_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-jfa-200a-lite_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-jfa-200a-lite_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-jfa-200a-lite_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
-
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-70a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-70a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-70a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-70a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-70a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
-                            
-                elif self.option_selected == "FONTE 200 BOB":
-                    if "bob" in new_name and "lite" not in new_name and "light" not in new_name  and "controle" not in new_name and 'jfa' in new_name and 'mono' not in new_name and 'mono' not in new_name and 'monovolt' not in new_name:
-                        if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name or "200 a" in new_name:
+                if self.option_selected == "Fonte Usina Smart 100A":       
+                    if "usina" in new_name and ("smart" in new_name or "samrt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name:
+                        if "100a" in new_name or "100" in new_name or "100 amperes" in new_name or "100amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
-                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-200a-bob-jfa_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-jfa-200a-bo_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-jfa-200a-bo_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-jfa-200a-bo_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-jfa-200a-bo_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-100a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-100a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-100a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-100a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-100a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
+                            
+                if self.option_selected == "Fonte Usina Smart 120A":       
+                    if "usina" in new_name and ("smart" in new_name or "samrt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name:
+                        if "120a" in new_name or "120" in new_name or "120 amperes" in new_name or "120amperes" in new_name:
+                            yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-120a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-120a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-120a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-120a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-120a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
+                            
+                if self.option_selected == "Fonte Usina Smart 160A":       
+                    if "usina" in new_name and ("smart" in new_name or "samrt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name:
+                        if "160a" in new_name or "160" in new_name or "160 amperes" in new_name or "160amperes" in new_name:
+                            yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-160a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-160a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-160a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-160a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-160a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
+                            
+                if self.option_selected == "Fonte Usina Smart 200A MONO":       
+                    if "usina" in new_name and ("smart" in new_name or "samrt" in new_name) and ("mono" in new_name or "220v" in new_name or "monovolt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name:
+                        if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name:
+                            yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-200a-mono-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-200a-mono-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-200a-mono-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-200a-mono-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-200a-mono-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
+                            
+                if self.option_selected == "Fonte Usina Smart 200A":       
+                    if "usina" in new_name and ("samrt" in new_name or "samrt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name:
+                        if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name:
+                            yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-200a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-200a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-200a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-200a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-200a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
+                            
+                if self.option_selected == "Fonte Usina 220A":       
+                    if "usina" in new_name and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "smart" not in new_name and "samrt" not in new_name and "12v" in new_name:
+                        if "220a" in new_name or "220" in new_name or "220 amperes" in new_name or "220amperes" in new_name:
+                            yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-220a_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-220a_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-220a_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-220a_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-220a_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
+                            
+                if self.option_selected == "Fonte Usina 30A":       
+                    if "usina" in new_name and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "smart" not in new_name and "samrt" not in new_name and "24v" in new_name:
+                        if "30a" in new_name or "30" in new_name or "30 amperes" in new_name or "30amperes" in new_name:
+                            yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-30a_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-30a_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-30a_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-30a_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-30a_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
+                            
+                if self.option_selected == "Fonte Usina 70A":       
+                    if "usina" in new_name and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "smart" not in new_name and "samrt" not in new_name and "24v" in new_name:
+                        if "70a" in new_name or "70" in new_name or "70 amperes" in new_name or "70amperes" in new_name:
+                            yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-70a_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-70a_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-70a_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-70a_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-70a_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
+                            
+                if self.option_selected == "Fonte Usina 100A":       
+                    if "usina" in new_name and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "smart" not in new_name and "samrt" not in new_name and "24v" in new_name:
+                        if "100a" in new_name or "100" in new_name or "100 amperes" in new_name or "100amperes" in new_name:
+                            yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-100a_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-100a_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-100a_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-100a_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-100a_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
+                            
+                if self.option_selected == "Conversor de Tensao 30A":       
+                    if "usina" in new_name and "conversor" in new_name:
+                        if "30a" in new_name or "30" in new_name or "30 amperes" in new_name or "30amperes" in new_name:
+                            yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/conversor_de_tensao_30a_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/conversor_de_tensao_30a_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/conversor_de_tensao_30a_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/conversor_de_tensao_30a_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/conversor_de_tensao_30a_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
+                            
+                if self.option_selected == "Conversor de Tensao 60A":       
+                    if "usina" in new_name and "conversor" in new_name:
+                        if "60a" in new_name or "60" in new_name or "60 amperes" in new_name or "60amperes" in new_name:
+                            yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/conversor_de_tensao_60a_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/conversor_de_tensao_60a_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/conversor_de_tensao_60a_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/conversor_de_tensao_60a_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/conversor_de_tensao_60a_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
+                                                        
+                if self.option_selected == "Conversor de Tensao 120A":       
+                    if "usina" in new_name and "conversor" in new_name:
+                        if "120a" in new_name or "120" in new_name or "120 amperes" in new_name or "120amperes" in new_name:
+                            yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/conversor_de_tensao_120a_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/conversor_de_tensao_120a_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/conversor_de_tensao_120a_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/conversor_de_tensao_120a_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/conversor_de_tensao_120a_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
 
-    
+                if self.option_selected == "Conversor de Tensao 240A":       
+                    if "usina" in new_name and "conversor" in new_name:
+                        if "240a" in new_name or "240" in new_name or "240 amperes" in new_name or "240amperes" in new_name:
+                            yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/conversor_de_tensao_240a_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/conversor_de_tensao_240a_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/conversor_de_tensao_240a_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/conversor_de_tensao_240a_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/conversor_de_tensao_240a_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
+                                                    
+                if self.option_selected == "Carregador de Baterias Charger 60A":       
+                    if "usina" in new_name and "charger" in new_name and "12v" in new_name:
+                        if "60a" in new_name or "60" in new_name or "60 amperes" in new_name or "60amperes" in new_name:
+                            yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/carregador_baterias_charger_60a_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/carregador_baterias_charger_60a_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/carregador_baterias_charger_60a_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/carregador_baterias_charger_60a_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/carregador_baterias_charger_60a_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
+                                                    
                 
     def parse_product(self, response):
         name = response.meta['name']
@@ -607,11 +543,10 @@ class MlSpider(scrapy.Spider):
 
         self.option_selected_new = self.option_selected
         price = extract_price(response)
+            
         if not price:
             return        
-        new_price_float = price
-           
-        
+        new_price_float = price   
         
             
         parcelado = response.xpath('//*[@id="pricing_price_subtitle"]/text()').get()
@@ -651,58 +586,98 @@ class MlSpider(scrapy.Spider):
         
             
         if tipo == "Clássico" and new_price_float:
-            if self.option_selected_new == "FONTE 40A" and new_price_float >= fonte40Classico:
+            if self.option_selected_new == "Fonte Usina Bob 60A" and new_price_float >= fonteBob60Classico:
                 return;
-            elif self.option_selected_new == "FONTE 60A LITE" and new_price_float >= fonte60liteClassico:
+            elif self.option_selected_new == "Fonte Usina Bob 120A" and new_price_float >= fonteBob120Classico:
                 return;
-            elif self.option_selected_new == "FONTE 60A" and new_price_float >= fonte60Classico:
+            elif self.option_selected_new == "Fonte Usina Bob 200A" and new_price_float >= fonteBob200Classico:
                 return;
-            elif self.option_selected_new == "FONTE 70A LITE" and new_price_float >= fonte70liteClassico:
+            elif self.option_selected_new == "Fonte Usina Battery Meter 50A" and new_price_float >= fonteBaterryMeter50Classico:
                 return;
-            elif self.option_selected_new == "FONTE 70A" and new_price_float >= fonte70Classico:
+            elif self.option_selected_new == "Fonte Usina Battery Meter 70A" and new_price_float >= fonteBaterryMeter70Classico:
                 return;
-            elif self.option_selected_new == "FONTE 90 BOB" and new_price_float >= fonte90bobClassico:
+            elif self.option_selected_new == "Fonte Usina Battery Meter 100A" and new_price_float >= fonteBaterryMeter100Classico:
                 return;
-            elif self.option_selected_new == "FONTE 120 BOB" and new_price_float >= fonte120bobClassico:
+            elif self.option_selected_new == "Fonte Usina Battery Meter 120A" and new_price_float >= fonteBaterryMeter120Classico:
                 return;
-            elif self.option_selected_new == "FONTE 120A LITE" and new_price_float >= fonte120liteClassico:
+            elif self.option_selected_new == "Fonte Usina Smart 50A" and new_price_float >= fonteSmart50Classico:
                 return;
-            elif self.option_selected_new == "FONTE 120A" and new_price_float >= fonte120Classico:
+            elif self.option_selected_new == "Fonte Usina Smart 70A" and new_price_float >= fonteSmart70Classico:
                 return;
-            elif self.option_selected_new == "FONTE 200 BOB" and new_price_float >= fonte200bobClassico:
+            elif self.option_selected_new == "Fonte Usina Smart 100A" and new_price_float >= fonteSmart100Classico:
                 return;
-            elif self.option_selected_new == "FONTE 200A LITE" and new_price_float >= fonte200liteClassico:
+            elif self.option_selected_new == "Fonte Usina Smart 120A" and new_price_float >= fonteSmart120Classico:
                 return;
-            elif self.option_selected_new == "FONTE 200 MONO" and new_price_float >= fonte200monoClassico:
+            elif self.option_selected_new == "Fonte Usina Smart 160A" and new_price_float >= fonteSmart160Classico:
                 return;
-            elif self.option_selected_new == "FONTE 200A" and new_price_float >= fonte200Classico:
+            elif self.option_selected_new == "Fonte Usina Smart 200A MONO" and new_price_float >= fonteSmart200MonoClassico:
+                return;
+            elif self.option_selected_new == "Fonte Usina Smart 200A" and new_price_float >= fonteSmart200Classico:
+                return;
+            elif self.option_selected_new == "Fonte Usina 220A" and new_price_float >= fonteHeavyDuty220Classico:
+                return;
+            elif self.option_selected_new == "Fonte Usina 30A" and new_price_float >= fonte30Classico:
+                return;
+            elif self.option_selected_new == "Fonte Usina 70A" and new_price_float >= fonte70Classico:
+                return;
+            elif self.option_selected_new == "Fonte Usina 100A" and new_price_float >= fonte100Classico:
+                return;
+            elif self.option_selected_new == "Conversor de Tensao 30A" and new_price_float >= ConversorDeTensao30AClassico:
+                return;
+            elif self.option_selected_new == "Conversor de Tensao 60A" and new_price_float >= ConversorDeTensao60AClassico:
+                return;
+            elif self.option_selected_new == "Conversor de Tensao 120A" and new_price_float >= ConversorDeTensao120AClassico:
+                return;
+            elif self.option_selected_new == "Conversor de Tensao 240A" and new_price_float >= ConversorDeTensao240AClassico:
+                return;
+            elif self.option_selected_new == "Carregador de Baterias Charger 60A" and new_price_float >= CarregadorDeBateriasCharger60AClassico:
                 return;
         elif tipo == "Premium" and new_price_float:
-            if self.option_selected_new == "FONTE 40A" and new_price_float >= fonte40Premium:
+            if self.option_selected_new == "Fonte Usina Bob 60A" and new_price_float >= fonteBob60Premium:
                 return;
-            elif self.option_selected_new == "FONTE 60A LITE" and new_price_float >= fonte60litePremium:
+            elif self.option_selected_new == "Fonte Usina Bob 120A" and new_price_float >= fonteBob120Premium:
                 return;
-            elif self.option_selected_new == "FONTE 60A" and new_price_float >= fonte60Premium:
+            elif self.option_selected_new == "Fonte Usina Bob 200A" and new_price_float >= fonteBob200Premium:
                 return;
-            elif self.option_selected_new == "FONTE 70A LITE" and new_price_float >= fonte70litePremium:
+            elif self.option_selected_new == "Fonte Usina Battery Meter 50A" and new_price_float >= fonteBaterryMeter50Premium:
                 return;
-            elif self.option_selected_new == "FONTE 70A" and new_price_float >= fonte70Premium:
+            elif self.option_selected_new == "Fonte Usina Battery Meter 70A" and new_price_float >= fonteBaterryMeter70Premium:
                 return;
-            elif self.option_selected_new == "FONTE 90 BOB" and new_price_float >= fonte90bobPremium:
+            elif self.option_selected_new == "Fonte Usina Battery Meter 100A" and new_price_float >= fonteBaterryMeter100Premium:
                 return;
-            elif self.option_selected_new == "FONTE 120 BOB" and new_price_float >= fonte120bobPremium:
+            elif self.option_selected_new == "Fonte Usina Battery Meter 120A" and new_price_float >= fonteBaterryMeter120Premium:
                 return;
-            elif self.option_selected_new == "FONTE 120A LITE" and new_price_float >= fonte120litePremium:
+            elif self.option_selected_new == "Fonte Usina Smart 50A" and new_price_float >= fonteSmart50Premium:
                 return;
-            elif self.option_selected_new == "FONTE 120A" and new_price_float >= fonte120Premium:
+            elif self.option_selected_new == "Fonte Usina Smart 70A" and new_price_float >= fonteSmart70Premium:
                 return;
-            elif self.option_selected_new == "FONTE 200 BOB" and new_price_float >= fonte200bobPremium:
+            elif self.option_selected_new == "Fonte Usina Smart 100A" and new_price_float >= fonteSmart100Premium:
                 return;
-            elif self.option_selected_new == "FONTE 200A LITE" and new_price_float >= fonte200litePremium:
+            elif self.option_selected_new == "Fonte Usina Smart 120A" and new_price_float >= fonteSmart120Premium:
                 return;
-            elif self.option_selected_new == "FONTE 200 MONO" and new_price_float >= fonte200monoPremium:
+            elif self.option_selected_new == "Fonte Usina Smart 160A" and new_price_float >= fonteSmart160Premium:
                 return;
-            elif self.option_selected_new == "FONTE 200A" and new_price_float >= fonte200Premium:
+            elif self.option_selected_new == "Fonte Usina Smart 200A MONO" and new_price_float >= fonteSmart200MonoPremium:
+                return;
+            elif self.option_selected_new == "Fonte Usina Smart 200A" and new_price_float >= fonteSmart200Premium:
+                return;
+            elif self.option_selected_new == "Fonte Usina 220A" and new_price_float >= fonteHeavyDuty220Premium:
+                return;
+            elif self.option_selected_new == "Fonte Usina 30A" and new_price_float >= fonte30Premium:
+                return;
+            elif self.option_selected_new == "Fonte Usina 70A" and new_price_float >= fonte70Premium:
+                return;
+            elif self.option_selected_new == "Fonte Usina 100A" and new_price_float >= fonte100Premium:
+                return;
+            elif self.option_selected_new == "Conversor de Tensao 30A" and new_price_float >= ConversorDeTensao30APremium:
+                return;
+            elif self.option_selected_new == "Conversor de Tensao 60A" and new_price_float >= ConversorDeTensao60APremium:
+                return;
+            elif self.option_selected_new == "Conversor de Tensao 120A" and new_price_float >= ConversorDeTensao120APremium:
+                return;
+            elif self.option_selected_new == "Conversor de Tensao 240A" and new_price_float >= ConversorDeTensao240APremium:
+                return;
+            elif self.option_selected_new == "Carregador de Baterias Charger 60A" and new_price_float >= CarregadorDeBateriasCharger60APremium:
                 return;
 
 
@@ -712,33 +687,53 @@ class MlSpider(scrapy.Spider):
 
 
     def finish(self, total_price, url, nomeFonte, loja, lugar):
-        if self.option_selected_new == "FONTE 40A" and total_price >= fonte40Marketplace:
+        if self.option_selected_new == "Fonte Usina Bob 60A" and total_price >= fonteBob60Marketplace:
             return;
-        elif self.option_selected_new == "FONTE 60A LITE" and total_price >= fonte60liteMarketplace:
+        elif self.option_selected_new == "Fonte Usina Bob 120A" and total_price >= fonteBob120Marketplace:
             return;
-        elif self.option_selected_new == "FONTE 60A" and total_price >= fonte60Marketplace:
+        elif self.option_selected_new == "Fonte Usina Bob 200A" and total_price >= fonteBob200Marketplace:
             return;
-        elif self.option_selected_new == "FONTE 70A LITE" and total_price >= fonte70liteMarketplace:
+        elif self.option_selected_new == "Fonte Usina Battery Meter 50A" and total_price >= fonteBaterryMeter50Marketplace:
             return;
-        elif self.option_selected_new == "FONTE 70A" and total_price >= fonte70Marketplace:
+        elif self.option_selected_new == "Fonte Usina Battery Meter 70A" and total_price >= fonteBaterryMeter70Marketplace:
             return;
-        elif self.option_selected_new == "FONTE 90 BOB" and total_price >= fonte90bobMarketplace:
+        elif self.option_selected_new == "Fonte Usina Battery Meter 100A" and total_price >= fonteBaterryMeter100Marketplace:
             return;
-        elif self.option_selected_new == "FONTE 120 BOB" and total_price >= fonte120bobMarketplace:
+        elif self.option_selected_new == "Fonte Usina Battery Meter 120A" and total_price >= fonteBaterryMeter120Marketplace:
             return;
-        elif self.option_selected_new == "FONTE 120A LITE" and total_price >= fonte120liteMarketplace:
+        elif self.option_selected_new == "Fonte Usina Smart 50A" and total_price >= fonteSmart50Marketplace:
             return;
-        elif self.option_selected_new == "FONTE 120A" and total_price >= fonte120Marketplace:
+        elif self.option_selected_new == "Fonte Usina Smart 70A" and total_price >= fonteSmart70Marketplace:
             return;
-        elif self.option_selected_new == "FONTE 200 BOB" and total_price >= fonte200bobMarketplace:
+        elif self.option_selected_new == "Fonte Usina Smart 100A" and total_price >= fonteSmart100Marketplace:
             return;
-        elif self.option_selected_new == "FONTE 200A LITE" and total_price >= fonte200liteMarketplace:
+        elif self.option_selected_new == "Fonte Usina Smart 120A" and total_price >= fonteSmart120Marketplace:
             return;
-        elif self.option_selected_new == "FONTE 200 MONO" and total_price >= fonte200monoMarketplace:
+        elif self.option_selected_new == "Fonte Usina Smart 160A" and total_price >= fonteSmart160Marketplace:
             return;
-        elif self.option_selected_new == "FONTE 200A" and total_price >= fonte200Marketplace:
+        elif self.option_selected_new == "Fonte Usina Smart 200A MONO" and total_price >= fonteSmart200MonoMarketplace:
             return;
-        
+        elif self.option_selected_new == "Fonte Usina Smart 200A" and total_price >= fonteSmart200Marketplace:
+            return;
+        elif self.option_selected_new == "Fonte Usina 220A" and total_price >= fonteHeavyDuty220Marketplace:
+            return;
+        elif self.option_selected_new == "Fonte Usina 30A" and total_price >= fonte30Marketplace:
+            return;
+        elif self.option_selected_new == "Fonte Usina 70A" and total_price >= fonte70Marketplace:
+            return;
+        elif self.option_selected_new == "Fonte Usina 100A" and total_price >= fonte100Marketplace:
+            return;
+        elif self.option_selected_new == "Conversor de Tensao 30A" and total_price >= ConversorDeTensao30AMarketplace:
+            return;
+        elif self.option_selected_new == "Conversor de Tensao 60A" and total_price >= ConversorDeTensao60AMarketplace:
+            return;
+        elif self.option_selected_new == "Conversor de Tensao 120A" and total_price >= ConversorDeTensao120AMarketplace:
+            return;
+        elif self.option_selected_new == "Conversor de Tensao 240A" and total_price >= ConversorDeTensao240AMarketplace:
+            return;
+        elif self.option_selected_new == "Carregador de Baterias Charger 60A" and total_price >= CarregadorDeBateriasCharger60AMarketplace:
+            return;
+    
         parcelado = self.get_price_previsto("NA")
 
         doc.add_paragraph(f'Modelo: {self.option_selected_new}')
@@ -751,7 +746,7 @@ class MlSpider(scrapy.Spider):
         doc.add_paragraph(f'Lugar: {lugar}')
         doc.add_paragraph("--------------------------------------------------------------------")
         doc.add_paragraph('')
-        doc.save(fr"dados/{self.option_selected_new}.docx")
+        doc.save(fr"dados/{self.option_selected_new}.docx") 
             
         yield {
             'url': url,
@@ -780,77 +775,102 @@ class MlSpider(scrapy.Spider):
             if price:
                 price = price.replace('.', '')
                 total_price = float(f"{price}.{cents}")
-            if self.option_selected == "FONTE 40A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "40a" in nomeFonte or "40" in nomeFonte or "40 amperes" in nomeFonte or "40amperes" in nomeFonte or "36a" in nomeFonte or "36" in nomeFonte or "36 amperes" in nomeFonte or "36amperes" in nomeFonte:
+            else:
+                return
+            if self.option_selected == "Fonte Usina Bob 60A":       
+                if "bob" in nomeFonte and "usina" in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte:
+                            yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina Bob 120A":       
+                if "bob" in nomeFonte and "usina" in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina Bob 200A":       
+                if "bob" in nomeFonte and "usina" in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte and "12v" in nomeFonte:
+                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina Battery Meter 50A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "bob" not in nomeFonte and "12v" in nomeFonte:
+                    if "50a" in nomeFonte or "50" in nomeFonte or "50 amperes" in nomeFonte or "50amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina Battery Meter 70A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "bob" not in nomeFonte and "12v" in nomeFonte:
+                    if "50a" in nomeFonte or "50" in nomeFonte or "50 amperes" in nomeFonte or "50amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina Battery Meter 100A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "bob" not in nomeFonte and "12v" in nomeFonte:
+                    if "100a" in nomeFonte or "100" in nomeFonte or "100 amperes" in nomeFonte or "100amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina Battery Meter 120A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "bob" not in nomeFonte and "12v" in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina Smart 50A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "50a" in nomeFonte or "50" in nomeFonte or "50 amperes" in nomeFonte or "50amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina Smart 70A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina Smart 100A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "100a" in nomeFonte or "100" in nomeFonte or "100 amperes" in nomeFonte or "100amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina Smart 120A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina Smart 160A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "160a" in nomeFonte or "160" in nomeFonte or "160 amperes" in nomeFonte or "160amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina Smart 200A MONO":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and ("mono" in nomeFonte or "220v" in nomeFonte or "monovolt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina Smart 200A":       
+                if "usina" in nomeFonte and ("samrt" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina 220A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "12v" in nomeFonte:
+                    if "220a" in nomeFonte or "220" in nomeFonte or "220 amperes" in nomeFonte or "220amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina 30A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "24v" in nomeFonte:
+                    if "30a" in nomeFonte or "30" in nomeFonte or "30 amperes" in nomeFonte or "30amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina 70A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "24v" in nomeFonte:
+                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina 100A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "24v" in nomeFonte:
+                    if "100a" in nomeFonte or "100" in nomeFonte or "100 amperes" in nomeFonte or "100amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Conversor de Tensao 30A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "30a" in nomeFonte or "30" in nomeFonte or "30 amperes" in nomeFonte or "30amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Conversor de Tensao 60A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Conversor de Tensao 120A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Conversor de Tensao 240A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "240a" in nomeFonte or "240" in nomeFonte or "240 amperes" in nomeFonte or "240amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Carregador de Baterias Charger 60A":       
+                if "usina" in nomeFonte and "charger" in nomeFonte and "12v" in nomeFonte:
+                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+                            
                         
-            elif self.option_selected == "FONTE 60A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                        
-            elif self.option_selected == "FONTE 60A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 70A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                        
-            elif self.option_selected == "FONTE 70A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 90 BOB":
-                if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "90a" in nomeFonte or "90" in nomeFonte or "90 amperes" in nomeFonte or "90amperes" in nomeFonte or "90 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 120A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                        
-            elif self.option_selected == "FONTE 120A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 120 BOB":
-                if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 200A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                        
-            elif self.option_selected == "FONTE 200 MONO":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and ("mono" in nomeFonte or "220v" in nomeFonte or "monovolt" in nomeFonte):
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 200A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 200 BOB":
-                if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                     
                     
     def parse_lsdistribuidora(self, response):
@@ -868,77 +888,98 @@ class MlSpider(scrapy.Spider):
             if price:
                 price = price.replace('.', '')
                 total_price = float(f"{price}.{cents}")
-            if self.option_selected == "FONTE 40A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "40a" in nomeFonte or "40" in nomeFonte or "40 amperes" in nomeFonte or "40amperes" in nomeFonte or "36a" in nomeFonte or "36" in nomeFonte or "36 amperes" in nomeFonte or "36amperes" in nomeFonte:
+            if self.option_selected == "Fonte Usina Bob 60A":       
+                if "bob" in nomeFonte and "usina" in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte:
+                            yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina Bob 120A":       
+                if "bob" in nomeFonte and "usina" in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                        
-            elif self.option_selected == "FONTE 60A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Bob 200A":       
+                if "bob" in nomeFonte and "usina" in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte and "12v" in nomeFonte:
+                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                        
-            elif self.option_selected == "FONTE 60A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Battery Meter 50A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "bob" not in nomeFonte and "12v" in nomeFonte:
+                    if "50a" in nomeFonte or "50" in nomeFonte or "50 amperes" in nomeFonte or "50amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 70A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Battery Meter 70A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "bob" not in nomeFonte and "12v" in nomeFonte:
+                    if "50a" in nomeFonte or "50" in nomeFonte or "50 amperes" in nomeFonte or "50amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                        
-            elif self.option_selected == "FONTE 70A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Battery Meter 100A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "bob" not in nomeFonte and "12v" in nomeFonte:
+                    if "100a" in nomeFonte or "100" in nomeFonte or "100 amperes" in nomeFonte or "100amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 90 BOB":
-                if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "90a" in nomeFonte or "90" in nomeFonte or "90 amperes" in nomeFonte or "90amperes" in nomeFonte or "90 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Battery Meter 120A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "bob" not in nomeFonte and "12v" in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 120A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Smart 50A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "50a" in nomeFonte or "50" in nomeFonte or "50 amperes" in nomeFonte or "50amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                        
-            elif self.option_selected == "FONTE 120A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Smart 70A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 120 BOB":
-                if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Smart 100A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "100a" in nomeFonte or "100" in nomeFonte or "100 amperes" in nomeFonte or "100amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 200A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Smart 120A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                        
-            elif self.option_selected == "FONTE 200 MONO":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and ("mono" in nomeFonte or "220v" in nomeFonte or "monovolt" in nomeFonte):
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Smart 160A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "160a" in nomeFonte or "160" in nomeFonte or "160 amperes" in nomeFonte or "160amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 200A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Smart 200A MONO":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and ("mono" in nomeFonte or "220v" in nomeFonte or "monovolt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 200 BOB":
-                if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)                
+            if self.option_selected == "Fonte Usina Smart 200A":       
+                if "usina" in nomeFonte and ("samrt" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina 220A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "12v" in nomeFonte:
+                    if "220a" in nomeFonte or "220" in nomeFonte or "220 amperes" in nomeFonte or "220amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina 30A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "24v" in nomeFonte:
+                    if "30a" in nomeFonte or "30" in nomeFonte or "30 amperes" in nomeFonte or "30amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina 70A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "24v" in nomeFonte:
+                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina 100A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "24v" in nomeFonte:
+                    if "100a" in nomeFonte or "100" in nomeFonte or "100 amperes" in nomeFonte or "100amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Conversor de Tensao 30A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "30a" in nomeFonte or "30" in nomeFonte or "30 amperes" in nomeFonte or "30amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Conversor de Tensao 60A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Conversor de Tensao 120A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Conversor de Tensao 240A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "240a" in nomeFonte or "240" in nomeFonte or "240 amperes" in nomeFonte or "240amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Carregador de Baterias Charger 60A":       
+                if "usina" in nomeFonte and "charger" in nomeFonte and "12v" in nomeFonte:
+                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
 
     
     def parse_bestonline(self, response):
@@ -956,78 +997,98 @@ class MlSpider(scrapy.Spider):
             if price:
                 price = price.replace('.', '')
                 total_price = float(f"{price}.{cents}")
-            if self.option_selected == "FONTE 40A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "40a" in nomeFonte or "40" in nomeFonte or "40 amperes" in nomeFonte or "40amperes" in nomeFonte or "36a" in nomeFonte or "36" in nomeFonte or "36 amperes" in nomeFonte or "36amperes" in nomeFonte:
+            if self.option_selected == "Fonte Usina Bob 60A":       
+                if "bob" in nomeFonte and "usina" in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte:
+                            yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina Bob 120A":       
+                if "bob" in nomeFonte and "usina" in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                        
-            elif self.option_selected == "FONTE 60A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Bob 200A":       
+                if "bob" in nomeFonte and "usina" in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte and "12v" in nomeFonte:
+                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                        
-            elif self.option_selected == "FONTE 60A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Battery Meter 50A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "bob" not in nomeFonte and "12v" in nomeFonte:
+                    if "50a" in nomeFonte or "50" in nomeFonte or "50 amperes" in nomeFonte or "50amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 70A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Battery Meter 70A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "bob" not in nomeFonte and "12v" in nomeFonte:
+                    if "50a" in nomeFonte or "50" in nomeFonte or "50 amperes" in nomeFonte or "50amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                        
-            elif self.option_selected == "FONTE 70A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Battery Meter 100A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "bob" not in nomeFonte and "12v" in nomeFonte:
+                    if "100a" in nomeFonte or "100" in nomeFonte or "100 amperes" in nomeFonte or "100amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 90 BOB":
-                if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "90a" in nomeFonte or "90" in nomeFonte or "90 amperes" in nomeFonte or "90amperes" in nomeFonte or "90 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Battery Meter 120A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "bob" not in nomeFonte and "12v" in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 120A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Smart 50A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "50a" in nomeFonte or "50" in nomeFonte or "50 amperes" in nomeFonte or "50amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                        
-            elif self.option_selected == "FONTE 120A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Smart 70A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 120 BOB":
-                if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Smart 100A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "100a" in nomeFonte or "100" in nomeFonte or "100 amperes" in nomeFonte or "100amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 200A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Smart 120A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                        
-            elif self.option_selected == "FONTE 200 MONO":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and ("mono" in nomeFonte or "220v" in nomeFonte or "monovolt" in nomeFonte):
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Smart 160A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "160a" in nomeFonte or "160" in nomeFonte or "160 amperes" in nomeFonte or "160amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 200A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Smart 200A MONO":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and ("mono" in nomeFonte or "220v" in nomeFonte or "monovolt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 200 BOB":
-                if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Smart 200A":       
+                if "usina" in nomeFonte and ("samrt" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-            
+            if self.option_selected == "Fonte Usina 220A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "12v" in nomeFonte:
+                    if "220a" in nomeFonte or "220" in nomeFonte or "220 amperes" in nomeFonte or "220amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina 30A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "24v" in nomeFonte:
+                    if "30a" in nomeFonte or "30" in nomeFonte or "30 amperes" in nomeFonte or "30amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina 70A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "24v" in nomeFonte:
+                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina 100A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "24v" in nomeFonte:
+                    if "100a" in nomeFonte or "100" in nomeFonte or "100 amperes" in nomeFonte or "100amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Conversor de Tensao 30A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "30a" in nomeFonte or "30" in nomeFonte or "30 amperes" in nomeFonte or "30amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Conversor de Tensao 60A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Conversor de Tensao 120A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Conversor de Tensao 240A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "240a" in nomeFonte or "240" in nomeFonte or "240 amperes" in nomeFonte or "240amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Carregador de Baterias Charger 60A":       
+                if "usina" in nomeFonte and "charger" in nomeFonte and "12v" in nomeFonte:
+                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)   
     
     def parse_renovonline(self, response):
         loja = "RENOV ONLINE"
@@ -1044,78 +1105,99 @@ class MlSpider(scrapy.Spider):
             if price:
                 price = price.replace('.', '')
                 total_price = float(f"{price}.{cents}")
-            if self.option_selected == "FONTE 40A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "40a" in nomeFonte or "40" in nomeFonte or "40 amperes" in nomeFonte or "40amperes" in nomeFonte or "36a" in nomeFonte or "36" in nomeFonte or "36 amperes" in nomeFonte or "36amperes" in nomeFonte:
+            if self.option_selected == "Fonte Usina Bob 60A":       
+                if "bob" in nomeFonte and "usina" in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte:
+                            yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina Bob 120A":       
+                if "bob" in nomeFonte and "usina" in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                        
-            elif self.option_selected == "FONTE 60A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Bob 200A":       
+                if "bob" in nomeFonte and "usina" in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte and "12v" in nomeFonte:
+                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                        
-            elif self.option_selected == "FONTE 60A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Battery Meter 50A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "bob" not in nomeFonte and "12v" in nomeFonte:
+                    if "50a" in nomeFonte or "50" in nomeFonte or "50 amperes" in nomeFonte or "50amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 70A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Battery Meter 70A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "bob" not in nomeFonte and "12v" in nomeFonte:
+                    if "50a" in nomeFonte or "50" in nomeFonte or "50 amperes" in nomeFonte or "50amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                        
-            elif self.option_selected == "FONTE 70A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Battery Meter 100A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "bob" not in nomeFonte and "12v" in nomeFonte:
+                    if "100a" in nomeFonte or "100" in nomeFonte or "100 amperes" in nomeFonte or "100amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 90 BOB":
-                if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "90a" in nomeFonte or "90" in nomeFonte or "90 amperes" in nomeFonte or "90amperes" in nomeFonte or "90 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Battery Meter 120A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "bob" not in nomeFonte and "12v" in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 120A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Smart 50A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "50a" in nomeFonte or "50" in nomeFonte or "50 amperes" in nomeFonte or "50amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                        
-            elif self.option_selected == "FONTE 120A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Smart 70A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 120 BOB":
-                if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Smart 100A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "100a" in nomeFonte or "100" in nomeFonte or "100 amperes" in nomeFonte or "100amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 200A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Smart 120A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                        
-            elif self.option_selected == "FONTE 200 MONO":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and ("mono" in nomeFonte or "220v" in nomeFonte or "monovolt" in nomeFonte):
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Smart 160A":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "160a" in nomeFonte or "160" in nomeFonte or "160 amperes" in nomeFonte or "160amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 200A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Smart 200A MONO":       
+                if "usina" in nomeFonte and ("smart" in nomeFonte or "samrt" in nomeFonte) and ("mono" in nomeFonte or "220v" in nomeFonte or "monovolt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 200 BOB":
-                if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)                
-        
+            if self.option_selected == "Fonte Usina Smart 200A":       
+                if "usina" in nomeFonte and ("samrt" in nomeFonte or "samrt" in nomeFonte) and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "12v" in nomeFonte:
+                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina 220A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "12v" in nomeFonte:
+                    if "220a" in nomeFonte or "220" in nomeFonte or "220 amperes" in nomeFonte or "220amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina 30A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "24v" in nomeFonte:
+                    if "30a" in nomeFonte or "30" in nomeFonte or "30 amperes" in nomeFonte or "30amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina 70A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "24v" in nomeFonte:
+                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Fonte Usina 100A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte and "samrt" not in nomeFonte and "24v" in nomeFonte:
+                    if "100a" in nomeFonte or "100" in nomeFonte or "100 amperes" in nomeFonte or "100amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Conversor de Tensao 30A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "30a" in nomeFonte or "30" in nomeFonte or "30 amperes" in nomeFonte or "30amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Conversor de Tensao 60A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Conversor de Tensao 120A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Conversor de Tensao 240A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "240a" in nomeFonte or "240" in nomeFonte or "240 amperes" in nomeFonte or "240amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+            if self.option_selected == "Carregador de Baterias Charger 60A":       
+                if "usina" in nomeFonte and "charger" in nomeFonte and "12v" in nomeFonte:
+                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+
     def parse_shoppratico(self, response):
         loja = "SHOPPRATICO"
         lugar = "Sorocaba, São Paulo."
@@ -1131,163 +1213,263 @@ class MlSpider(scrapy.Spider):
             if price:
                 price = price.replace('.', '')
                 total_price = float(f"{price}.{cents}")
-            if self.option_selected == "FONTE 40A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "40a" in nomeFonte or "40" in nomeFonte or "40 amperes" in nomeFonte or "40amperes" in nomeFonte or "36a" in nomeFonte or "36" in nomeFonte or "36 amperes" in nomeFonte or "36amperes" in nomeFonte:
+            if self.option_selected == "Fonte Usina Bob 60A":       
+                if "bob" in nomeFonte and "usina" in nomeFonte and "smart" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte:
+                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "FONTE 60A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Bob 120A":       
+                if "bob" in nomeFonte and "usina" in nomeFonte and "smart" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "FONTE 60A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte or "60 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 70A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Bob 200A":       
+                if "bob" in nomeFonte and "usina" in nomeFonte and "smart" not in nomeFonte and "battery" not in nomeFonte and "meter" not in nomeFonte:
+                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "FONTE 70A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte or "70 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 90 BOB":
-                if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "90a" in nomeFonte or "90" in nomeFonte or "90 amperes" in nomeFonte or "90amperes" in nomeFonte or "90 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 120A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Battery Meter 50A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "smart" not in nomeFonte and "bob" not in nomeFonte:
+                    if "50a" in nomeFonte or "50" in nomeFonte or "50 amperes" in nomeFonte or "50amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "FONTE 120A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte:
-                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 120 BOB":
-                if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte or "120 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
-                        
-            elif self.option_selected == "FONTE 200A":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Battery Meter 70A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "smart" not in nomeFonte and "bob" not in nomeFonte:
+                    if "50a" in nomeFonte or "50" in nomeFonte or "50 amperes" in nomeFonte or "50amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
                         
-            elif self.option_selected == "FONTE 200 MONO":
-                if "bob" not in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and ("mono" in nomeFonte or "220v" in nomeFonte or "monovolt" in nomeFonte):
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Battery Meter 100A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "smart" not in nomeFonte and "bob" not in nomeFonte:
+                    if "100a" in nomeFonte or "100" in nomeFonte or "100 amperes" in nomeFonte or "100amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
                         
-            elif self.option_selected == "FONTE 200A LITE":
-                if "bob" not in nomeFonte and "lite" in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
+            if self.option_selected == "Fonte Usina Battery Meter 120A":       
+                if "usina" in nomeFonte and "battery" in nomeFonte and "meter" in nomeFonte and "smart" not in nomeFonte and "bob" not in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
                         yield from self.finish(total_price, url, nomeFonte, loja, lugar)
-                    
                         
-            elif self.option_selected == "FONTE 200 BOB":
-                if "bob" in nomeFonte and "lite" not in nomeFonte and "controle" not in nomeFonte and 'jfa' in nomeFonte and 'mono' not in nomeFonte and 'monovolt' not in nomeFonte:
-                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte or "200 a" in nomeFonte:
-                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)       
+            if self.option_selected == "Fonte Usina Smart 50A":       
+                if "usina" in nomeFonte and "smart" in nomeFonte and "bob" not in nomeFonte and "battery" in nomeFonte and "meter" not in nomeFonte:
+                    if "50a" in nomeFonte or "50" in nomeFonte or "50 amperes" in nomeFonte or "50amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+                        
+            if self.option_selected == "Fonte Usina Smart 70A":       
+                if "usina" in nomeFonte and "smart" in nomeFonte and "bob" not in nomeFonte and "battery" in nomeFonte and "meter" not in nomeFonte:
+                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+                        
+            if self.option_selected == "Fonte Usina Smart 100A":       
+                if "usina" in nomeFonte and "smart" in nomeFonte and "bob" not in nomeFonte and "battery" in nomeFonte and "meter" not in nomeFonte:
+                    if "100a" in nomeFonte or "100" in nomeFonte or "100 amperes" in nomeFonte or "100amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+                        
+            if self.option_selected == "Fonte Usina Smart 120A":       
+                if "usina" in nomeFonte and "smart" in nomeFonte and "bob" not in nomeFonte and "battery" in nomeFonte and "meter" not in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+                        
+            if self.option_selected == "Fonte Usina Smart 160A":       
+                if "usina" in nomeFonte and "smart" in nomeFonte and "bob" not in nomeFonte and "battery" in nomeFonte and "meter" not in nomeFonte:
+                    if "160a" in nomeFonte or "160" in nomeFonte or "160 amperes" in nomeFonte or "160amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+                        
+            if self.option_selected == "Fonte Usina Smart 200A MONO":       
+                if "usina" in nomeFonte and "smart" in nomeFonte and ("mono" in nomeFonte or "220v" in nomeFonte or "monovolt" in nomeFonte) and "bob" not in nomeFonte and "battery" in nomeFonte and "meter" not in nomeFonte:
+                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+                        
+            if self.option_selected == "Fonte Usina Smart 200A":       
+                if "usina" in nomeFonte and "smart" in nomeFonte and "bob" not in nomeFonte and "battery" in nomeFonte and "meter" not in nomeFonte:
+                    if "200a" in nomeFonte or "200" in nomeFonte or "200 amperes" in nomeFonte or "200amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+                        
+            if self.option_selected == "Fonte Usina 220A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte:
+                    if "220a" in nomeFonte or "220" in nomeFonte or "220 amperes" in nomeFonte or "220amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+                        
+            if self.option_selected == "Fonte Usina 30A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte:
+                    if "30a" in nomeFonte or "30" in nomeFonte or "30 amperes" in nomeFonte or "30amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+                        
+            if self.option_selected == "Fonte Usina 70A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte:
+                    if "70a" in nomeFonte or "70" in nomeFonte or "70 amperes" in nomeFonte or "70amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+                        
+            if self.option_selected == "Fonte Usina 100A":       
+                if "usina" in nomeFonte and "bob" not in nomeFonte and "battery" in nomeFonte and "meter" not in nomeFonte and "smart" not in nomeFonte:
+                    if "100a" in nomeFonte or "100" in nomeFonte or "100 amperes" in nomeFonte or "100amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)     
         
+            if self.option_selected == "Conversor de Tensao 30A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "30a" in nomeFonte or "30" in nomeFonte or "30 amperes" in nomeFonte or "30amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+                        
+            if self.option_selected == "Conversor de Tensao 60A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+                                                    
+            if self.option_selected == "Conversor de Tensao 120A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "120a" in nomeFonte or "120" in nomeFonte or "120 amperes" in nomeFonte or "120amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+
+            if self.option_selected == "Conversor de Tensao 240A":       
+                if "usina" in nomeFonte and "conversor" in nomeFonte:
+                    if "240a" in nomeFonte or "240" in nomeFonte or "240 amperes" in nomeFonte or "240amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+                                                
+            if self.option_selected == "Carregador de Baterias Charger 60A":       
+                if "usina" in nomeFonte and "charger" in nomeFonte:
+                    if "60a" in nomeFonte or "60" in nomeFonte or "60 amperes" in nomeFonte or "60amperes" in nomeFonte:
+                        yield from self.finish(total_price, url, nomeFonte, loja, lugar)
+
     def get_price_previsto(self, tipo):
         if tipo == "Clássico":
-            for index, i in df.iterrows():
-                if self.option_selected_new == "FONTE 40A" and i['PRODUTO'] == "FONTE 40A":
-                    return round(i['COLUNA5'], 2);
-                elif self.option_selected_new == "FONTE 60A" and i['PRODUTO'] == "FONTE 60A":
-                    return round(i['COLUNA5'], 2);
-                elif self.option_selected_new == "FONTE 60A LITE" and i['PRODUTO'] == "FONTE 60A LITE":
-                    return round(i['COLUNA5'], 2);
-                elif self.option_selected_new == "FONTE 70A" and i['PRODUTO'] == "FONTE 70A":
-                    return round(i['COLUNA5'], 2);
-                elif self.option_selected_new == "FONTE 70A LITE" and i['PRODUTO'] == "FONTE 70A LITE":
-                    return round(i['COLUNA5'], 2);
-                elif self.option_selected_new == "FONTE 90 BOB" and i['PRODUTO'] == "FONTE 90 BOB":
-                    return round(i['COLUNA5'], 2);
-                elif self.option_selected_new == "FONTE 120 BOB" and i['PRODUTO'] == "FONTE 120 BOB":
-                    return round(i['COLUNA5'], 2);
-                elif self.option_selected_new == "FONTE 120A LITE" and i['PRODUTO'] == "FONTE 120A LITE":
-                    return round(i['COLUNA5'], 2);
-                elif self.option_selected_new == "FONTE 120A" and i['PRODUTO'] == "FONTE 120A":
-                    return round(i['COLUNA5'], 2);
-                elif self.option_selected_new == "FONTE 200 BOB" and i['PRODUTO'] == "FONTE 200 BOB":
-                    return round(i['COLUNA5'], 2);
-                elif self.option_selected_new == "FONTE 200A LITE" and i['PRODUTO'] == "FONTE 200A LITE":
-                    return round(i['COLUNA5'], 2);
-                elif self.option_selected_new == "FONTE 200 MONO" and i['PRODUTO'] == "FONTE 200 MONO":
-                    return round(i['COLUNA5'], 2);
-                elif self.option_selected_new == "FONTE 200A" and i['PRODUTO'] == "FONTE 200A":
-                    return round(i['COLUNA5'], 2);
+            if self.option_selected_new == "Fonte Usina Bob 60A":
+                return fonteBob60Classico
+            elif self.option_selected_new == "Fonte Usina Bob 120A":
+                return fonteBob120Classico
+            elif self.option_selected_new == "Fonte Usina Bob 200A":
+                return fonteBob200Classico
+            elif self.option_selected_new == "Fonte Usina Battery Meter 50A":
+                return fonteBaterryMeter50Classico
+            elif self.option_selected_new == "Fonte Usina Battery Meter 70A":
+                return fonteBaterryMeter70Classico
+            elif self.option_selected_new == "Fonte Usina Battery Meter 100A":
+                return fonteBaterryMeter100Classico
+            elif self.option_selected_new == "Fonte Usina Battery Meter 120A":
+                return fonteBaterryMeter120Classico
+            elif self.option_selected_new == "Fonte Usina Smart 50A":
+                return fonteSmart50Classico
+            elif self.option_selected_new == "Fonte Usina Smart 70A":
+                return fonteSmart70Classico
+            elif self.option_selected_new == "Fonte Usina Smart 100A":
+                return fonteSmart100Classico
+            elif self.option_selected_new == "Fonte Usina Smart 120A":
+                return fonteSmart120Classico
+            elif self.option_selected_new == "Fonte Usina Smart 160A":
+                return fonteSmart160Classico
+            elif self.option_selected_new == "Fonte Usina Smart 200A MONO":
+                return fonteSmart200MonoClassico
+            elif self.option_selected_new == "Fonte Usina Smart 200A":
+                return fonteSmart200Classico
+            elif self.option_selected_new == "Fonte Usina 220A":
+                return fonteHeavyDuty220Classico
+            elif self.option_selected_new == "Fonte Usina 30A":
+                return fonte30Classico
+            elif self.option_selected_new == "Fonte Usina 70A":
+                return fonte70Classico
+            elif self.option_selected_new == "Fonte Usina 100A":
+                return fonte100Classico
+            elif self.option_selected_new == "Conversor de Tensao 30A":
+                return ConversorDeTensao30AClassico
+            elif self.option_selected_new == "Conversor de Tensao 60A":
+                return ConversorDeTensao60AClassico
+            elif self.option_selected_new == "Conversor de Tensao 120A":
+                return ConversorDeTensao120AClassico
+            elif self.option_selected_new == "Conversor de Tensao 240A":
+                return ConversorDeTensao240AClassico
+            elif self.option_selected_new == "Carregador de Baterias Charger 60A":
+                return CarregadorDeBateriasCharger60AClassico
         elif tipo == "Premium":
-            for index, i in df.iterrows():
-                if self.option_selected_new == "FONTE 40A" and i['PRODUTO'] == "FONTE 40A":
-                    return round(i['COLUNA7'], 2);
-                elif self.option_selected_new == "FONTE 60A" and i['PRODUTO'] == "FONTE 60A":
-                    return round(i['COLUNA7'], 2);
-                elif self.option_selected_new == "FONTE 60A LITE" and i['PRODUTO'] == "FONTE 60A LITE":
-                    return round(i['COLUNA7'], 2);
-                elif self.option_selected_new == "FONTE 70A" and i['PRODUTO'] == "FONTE 70A":
-                    return round(i['COLUNA7'], 2);
-                elif self.option_selected_new == "FONTE 70A LITE" and i['PRODUTO'] == "FONTE 70A LITE":
-                    return round(i['COLUNA7'], 2);
-                elif self.option_selected_new == "FONTE 90 BOB" and i['PRODUTO'] == "FONTE 90 BOB":
-                    return round(i['COLUNA7'], 2);
-                elif self.option_selected_new == "FONTE 120 BOB" and i['PRODUTO'] == "FONTE 120 BOB":
-                    return round(i['COLUNA7'], 2);
-                elif self.option_selected_new == "FONTE 120A LITE" and i['PRODUTO'] == "FONTE 120A LITE":
-                    return round(i['COLUNA7'], 2);
-                elif self.option_selected_new == "FONTE 120A" and i['PRODUTO'] == "FONTE 120A":
-                    return round(i['COLUNA7'], 2);
-                elif self.option_selected_new == "FONTE 200 BOB" and i['PRODUTO'] == "FONTE 200 BOB":
-                    return round(i['COLUNA7'], 2);
-                elif self.option_selected_new == "FONTE 200A LITE" and i['PRODUTO'] == "FONTE 200A LITE":
-                    return round(i['COLUNA7'], 2);
-                elif self.option_selected_new == "FONTE 200 MONO" and i['PRODUTO'] == "FONTE 200 MONO":
-                    return round(i['COLUNA7'], 2);
-                elif self.option_selected_new == "FONTE 200A" and i['PRODUTO'] == "FONTE 200A":
-                    return round(i['COLUNA7'], 2);
+            if self.option_selected_new == "Fonte Usina Bob 60A":
+                return fonteBob60Premium
+            elif self.option_selected_new == "Fonte Usina Bob 120A":
+                return fonteBob120Premium
+            elif self.option_selected_new == "Fonte Usina Bob 200A":
+                return fonteBob200Premium
+            elif self.option_selected_new == "Fonte Usina Battery Meter 50A":
+                return fonteBaterryMeter50Premium
+            elif self.option_selected_new == "Fonte Usina Battery Meter 70A":
+                return fonteBaterryMeter70Premium
+            elif self.option_selected_new == "Fonte Usina Battery Meter 100A":
+                return fonteBaterryMeter100Premium
+            elif self.option_selected_new == "Fonte Usina Battery Meter 120A":
+                return fonteBaterryMeter120Premium
+            elif self.option_selected_new == "Fonte Usina Smart 50A":
+                return fonteSmart50Premium
+            elif self.option_selected_new == "Fonte Usina Smart 70A":
+                return fonteSmart70Premium
+            elif self.option_selected_new == "Fonte Usina Smart 100A":
+                return fonteSmart100Premium
+            elif self.option_selected_new == "Fonte Usina Smart 120A":
+                return fonteSmart120Premium
+            elif self.option_selected_new == "Fonte Usina Smart 160A":
+                return fonteSmart160Premium
+            elif self.option_selected_new == "Fonte Usina Smart 200A MONO":
+                return fonteSmart200MonoPremium
+            elif self.option_selected_new == "Fonte Usina Smart 200A":
+                return fonteSmart200Premium
+            elif self.option_selected_new == "Fonte Usina 220A":
+                return fonteHeavyDuty220Premium
+            elif self.option_selected_new == "Fonte Usina 30A":
+                return fonte30Premium
+            elif self.option_selected_new == "Fonte Usina 70A":
+                return fonte70Premium
+            elif self.option_selected_new == "Fonte Usina 100A":
+                return fonte100Premium
+            elif self.option_selected_new == "Conversor de Tensao 30A":
+                return ConversorDeTensao30APremium
+            elif self.option_selected_new == "Conversor de Tensao 60A":
+                return ConversorDeTensao60APremium
+            elif self.option_selected_new == "Conversor de Tensao 120A":
+                return ConversorDeTensao120APremium
+            elif self.option_selected_new == "Conversor de Tensao 240A":
+                return ConversorDeTensao240APremium
+            elif self.option_selected_new == "Carregador de Baterias Charger 60A":
+                return CarregadorDeBateriasCharger60APremium
         elif tipo == "NA":
-            for index, i in df.iterrows():
-                if self.option_selected_new == "FONTE 40A" and i['PRODUTO'] == "FONTE 40A":
-                    return round(i['COLUNA3'], 2);
-                elif self.option_selected_new == "FONTE 60A" and i['PRODUTO'] == "FONTE 60A":
-                    return round(i['COLUNA3'], 2);
-                elif self.option_selected_new == "FONTE 60A LITE" and i['PRODUTO'] == "FONTE 60A LITE":
-                    return round(i['COLUNA3'], 2);
-                elif self.option_selected_new == "FONTE 70A" and i['PRODUTO'] == "FONTE 70A":
-                    return round(i['COLUNA3'], 2);
-                elif self.option_selected_new == "FONTE 70A LITE" and i['PRODUTO'] == "FONTE 70A LITE":
-                    return round(i['COLUNA3'], 2);
-                elif self.option_selected_new == "FONTE 90 BOB" and i['PRODUTO'] == "FONTE 90 BOB":
-                    return round(i['COLUNA3'], 2);
-                elif self.option_selected_new == "FONTE 120 BOB" and i['PRODUTO'] == "FONTE 120 BOB":
-                    return round(i['COLUNA3'], 2);
-                elif self.option_selected_new == "FONTE 120A LITE" and i['PRODUTO'] == "FONTE 120A LITE":
-                    return round(i['COLUNA3'], 2);
-                elif self.option_selected_new == "FONTE 120A" and i['PRODUTO'] == "FONTE 120A":
-                    return round(i['COLUNA3'], 2);
-                elif self.option_selected_new == "FONTE 200 BOB" and i['PRODUTO'] == "FONTE 200 BOB":
-                    return round(i['COLUNA3'], 2);
-                elif self.option_selected_new == "FONTE 200A LITE" and i['PRODUTO'] == "FONTE 200A LITE":
-                    return round(i['COLUNA3'], 2);
-                elif self.option_selected_new == "FONTE 200 MONO" and i['PRODUTO'] == "FONTE 200 MONO":
-                    return round(i['COLUNA3'], 2);
-                elif self.option_selected_new == "FONTE 200A" and i['PRODUTO'] == "FONTE 200A":
-                    return round(i['COLUNA3'], 2);
+            if self.option_selected_new == "Fonte Usina Bob 60A":
+                return fonteBob60Marketplace
+            elif self.option_selected_new == "Fonte Usina Bob 120A":
+                return fonteBob120Marketplace
+            elif self.option_selected_new == "Fonte Usina Bob 200A":
+                return fonteBob200Marketplace
+            elif self.option_selected_new == "Fonte Usina Battery Meter 50A":
+                return fonteBaterryMeter50Marketplace
+            elif self.option_selected_new == "Fonte Usina Battery Meter 70A":
+                return fonteBaterryMeter70Marketplace
+            elif self.option_selected_new == "Fonte Usina Battery Meter 100A":
+                return fonteBaterryMeter100Marketplace
+            elif self.option_selected_new == "Fonte Usina Battery Meter 120A":
+                return fonteBaterryMeter120Marketplace
+            elif self.option_selected_new == "Fonte Usina Smart 50A":
+                return fonteSmart50Marketplace
+            elif self.option_selected_new == "Fonte Usina Smart 70A":
+                return fonteSmart70Marketplace
+            elif self.option_selected_new == "Fonte Usina Smart 100A":
+                return fonteSmart100Marketplace
+            elif self.option_selected_new == "Fonte Usina Smart 120A":
+                return fonteSmart120Marketplace
+            elif self.option_selected_new == "Fonte Usina Smart 160A":
+                return fonteSmart160Marketplace
+            elif self.option_selected_new == "Fonte Usina Smart 200A MONO":
+                return fonteSmart200MonoMarketplace
+            elif self.option_selected_new == "Fonte Usina Smart 200A":
+                return fonteSmart200Marketplace
+            elif self.option_selected_new == "Fonte Usina 220A":
+                return fonteHeavyDuty220Marketplace
+            elif self.option_selected_new == "Fonte Usina 30A":
+                return fonte30Marketplace
+            elif self.option_selected_new == "Fonte Usina 70A":
+                return fonte70Marketplace
+            elif self.option_selected_new == "Fonte Usina 100A":
+                return fonte100Marketplace
+            elif self.option_selected_new == "Conversor de Tensao 30A":
+                return ConversorDeTensao30AMarketplace
+            elif self.option_selected_new == "Conversor de Tensao 60A":
+                return ConversorDeTensao60AMarketplace
+            elif self.option_selected_new == "Conversor de Tensao 120A":
+                return ConversorDeTensao120AMarketplace
+            elif self.option_selected_new == "Conversor de Tensao 240A":
+                return ConversorDeTensao240AMarketplace
+            elif self.option_selected_new == "Carregador de Baterias Charger 60A":
+                return CarregadorDeBateriasCharger60AMarketplace
 
     def parse_location(self, response):
         name = response.meta['name']

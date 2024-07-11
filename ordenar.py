@@ -8,20 +8,29 @@ from spire.doc import *
 
 
 naoIndentificado= []
-storm40 = []
-storm60 = []
-lite60 = []
-lite70 = []
-storm70 = []
-bob90 = []
-storm120 = []
-lite120 = []
-bob120 = []
-storm200 = []
-lite200 = []
-mono200 = []
-bob200 = []
-
+FonteUsinaBob60A = []
+FonteUsinaBob200A = []
+FonteUsinaBob120A = []
+FonteUsinaBatteryMeter50A = []
+FonteUsinaBatteryMeter70A = []
+FonteUsinaBatteryMeter100A = []
+FonteUsinaBatteryMeter120A = []
+FonteUsinaSmart50A = []
+FonteUsinaSmart70A = []
+FonteUsinaSmart100A = []
+FonteUsinaSmart120A = []
+FonteUsinaSmart160A = []
+FonteUsinaSmart200AMONO = []
+FonteUsinaSmart200A = []
+FonteUsina220A = []
+FonteUsina30A = []
+FonteUsina70A = []
+FonteUsina100A = []
+ConversorDeTensao30A = []
+ConversorDeTensao60A = []
+ConversorDeTensao120A = []
+ConversorDeTensao240A =  []
+CarregadorDeBateriasCharger60A = []
 
 def read_docx(file_path):
     doc = docx.Document(file_path)
@@ -45,32 +54,52 @@ def read_text(text):
                     if current_item:
                         if current_item['Modelo'] == "Nao indentificado":
                             naoIndentificado.append(format_item_dif(current_item))
-                        if current_item['Modelo'] == "FONTE 40A":
-                            storm40.append((format_item(current_item), current_item['Loja']))
-                        if current_item['Modelo'] == "FONTE 60A LITE":
-                            lite60.append((format_item(current_item), current_item['Loja']))
-                        if current_item['Modelo'] == "FONTE 60A":
-                            storm60.append((format_item(current_item), current_item['Loja']))
-                        if current_item['Modelo'] == "FONTE 70A LITE":
-                            lite70.append((format_item(current_item), current_item['Loja']))
-                        if current_item['Modelo'] == "FONTE 70A":
-                            storm70.append((format_item(current_item), current_item['Loja']))
-                        if current_item['Modelo'] == "FONTE 90 BOB":
-                            bob90.append((format_item(current_item), current_item['Loja']))
-                        if current_item['Modelo'] == "FONTE 120":
-                            storm120.append((format_item(current_item), current_item['Loja']))
-                        if current_item['Modelo'] == "FONTE 120A LITE":
-                            lite120.append((format_item(current_item), current_item['Loja']))
-                        if current_item['Modelo'] == "FONTE 120 BOB":
-                            bob120.append((format_item(current_item), current_item['Loja']))
-                        if current_item['Modelo'] == "FONTE 200A":
-                            storm200.append((format_item(current_item), current_item['Loja']))
-                        if current_item['Modelo'] == "FONTE 200A LITE":
-                            lite200.append((format_item(current_item), current_item['Loja']))
-                        if current_item['Modelo'] == "FONTE 200 BOB":
-                            bob200.append((format_item(current_item), current_item['Loja']))
-                        if current_item['Modelo'] == "FONTE 200 MONO":
-                            mono200.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Fonte Usina Bob 60A":
+                            FonteUsinaBob60A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Fonte Usina Bob 120A":
+                            FonteUsinaBob120A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Fonte Usina Bob 200A":
+                            FonteUsinaBob200A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Fonte Usina Battery Meter 50A":
+                            FonteUsinaBatteryMeter50A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Fonte Usina Battery Meter 70A":
+                            FonteUsinaBatteryMeter70A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Fonte Usina Battery Meter 100A":
+                            FonteUsinaBatteryMeter100A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Fonte Usina Battery Meter 120A":
+                            FonteUsinaBatteryMeter120A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Fonte Usina Smart 50A":
+                            FonteUsinaSmart50A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Fonte Usina Smart 70A":
+                            FonteUsinaSmart70A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Fonte Usina Smart 100A":
+                            FonteUsinaSmart100A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Fonte Usina Smart 120A":
+                            FonteUsinaSmart120A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Fonte Usina Smart 160A":
+                            FonteUsinaSmart160A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Fonte Usina Smart 200A MONO":
+                            FonteUsinaSmart200AMONO.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Fonte Usina Smart 200A":
+                            FonteUsinaSmart200A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Fonte Usina 220A":
+                            FonteUsina220A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Fonte Usina 30A":
+                            FonteUsina30A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Fonte Usina 70A":
+                            FonteUsina70A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Fonte Usina 100A":
+                            FonteUsina100A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Conversor de Tensao 30A":
+                            ConversorDeTensao30A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Conversor de Tensao 60A":
+                            ConversorDeTensao60A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Conversor de Tensao 120A":
+                            ConversorDeTensao120A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Conversor de Tensao 240A":
+                            ConversorDeTensao240A.append((format_item(current_item), current_item['Loja']))
+                        if current_item['Modelo'] == "Carregador de Baterias Charger 60A":
+                            CarregadorDeBateriasCharger60A.append((format_item(current_item), current_item['Loja']))
                         current_item = {}
                 current_item['Modelo'] = line.split("Modelo:", 1)[1].strip()
                 
@@ -92,32 +121,52 @@ def read_text(text):
         if current_item:
             if current_item['Modelo'] == "Nao indentificado":
                 naoIndentificado.append(format_item_dif(current_item))
-            if current_item['Modelo'] == "FONTE 40A":
-                storm40.append((format_item(current_item), current_item['Loja']))
-            if current_item['Modelo'] == "FONTE 60A LITE":
-                lite60.append((format_item(current_item), current_item['Loja']))
-            if current_item['Modelo'] == "FONTE 60A":
-                storm60.append((format_item(current_item), current_item['Loja']))
-            if current_item['Modelo'] == "FONTE 70A LITE":
-                lite70.append((format_item(current_item), current_item['Loja']))
-            if current_item['Modelo'] == "FONTE 70A":
-                storm70.append((format_item(current_item), current_item['Loja']))
-            if current_item['Modelo'] == "FONTE 90 BOB":
-                bob90.append((format_item(current_item), current_item['Loja']))
-            if current_item['Modelo'] == "FONTE 120":
-                storm120.append((format_item(current_item), current_item['Loja']))
-            if current_item['Modelo'] == "FONTE 120A LITE":
-                lite120.append((format_item(current_item), current_item['Loja']))
-            if current_item['Modelo'] == "FONTE 120 BOB":
-                bob120.append((format_item(current_item), current_item['Loja']))
-            if current_item['Modelo'] == "FONTE 200A":
-                storm200.append((format_item(current_item), current_item['Loja']))
-            if current_item['Modelo'] == "FONTE 200A LITE":
-                lite200.append((format_item(current_item), current_item['Loja']))
-            if current_item['Modelo'] == "FONTE 200 BOB":
-                bob200.append((format_item(current_item), current_item['Loja']))
-            if current_item['Modelo'] == "FONTE 200 MONO":
-                mono200.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Fonte Usina Bob 60A":
+                FonteUsinaBob60A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Fonte Usina Bob 120A":
+                FonteUsinaBob120A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Fonte Usina Bob 200A":
+                FonteUsinaBob200A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Fonte Usina Battery Meter 50A":
+                FonteUsinaBatteryMeter50A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Fonte Usina Battery Meter 70A":
+                FonteUsinaBatteryMeter70A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Fonte Usina Battery Meter 100A":
+                FonteUsinaBatteryMeter100A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Fonte Usina Battery Meter 120A":
+                FonteUsinaBatteryMeter120A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Fonte Usina Smart 50A":
+                FonteUsinaSmart50A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Fonte Usina Smart 70A":
+                FonteUsinaSmart70A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Fonte Usina Smart 100A":
+                FonteUsinaSmart100A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Fonte Usina Smart 120A":
+                FonteUsinaSmart120A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Fonte Usina Smart 160A":
+                FonteUsinaSmart160A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Fonte Usina Smart 200A MONO":
+                FonteUsinaSmart200AMONO.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Fonte Usina Smart 200A":
+                FonteUsinaSmart200A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Fonte Usina 220A":
+                FonteUsina220A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Fonte Usina 30A":
+                FonteUsina30A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Fonte Usina 70A":
+                FonteUsina70A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Fonte Usina 100A":
+                FonteUsina100A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Conversor de Tensao 30A":
+                ConversorDeTensao30A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Conversor de Tensao 60A":
+                ConversorDeTensao60A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Conversor de Tensao 120A":
+                ConversorDeTensao120A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Conversor de Tensao 240A":
+                ConversorDeTensao240A.append((format_item(current_item), current_item['Loja']))
+            if current_item['Modelo'] == "Carregador de Baterias Charger 60A":
+                CarregadorDeBateriasCharger60A.append((format_item(current_item), current_item['Loja']))
             current_item = {}
 
 
@@ -137,58 +186,98 @@ for item_path in os.listdir(r"dados/"):
     read_text(text)
 
 output_doc = docx.Document()
-for item in storm40:
+for item in FonteUsinaBob60A:
     if item[1] not in lojas:
         lojas[item[1]] = []
-    lojas[item[1]].append((item[0], "FONTE 40A"))
-for item in lite60:
+    lojas[item[1]].append((item[0], "Fonte Usina Bob 60A"))
+for item in FonteUsinaBob120A:
     if item[1] not in lojas:
         lojas[item[1]] = []
-    lojas[item[1]].append((item[0], "FONTE 60A LITE"))
-for item in storm60:
+    lojas[item[1]].append((item[0], "Fonte Usina Bob 120A"))
+for item in FonteUsinaBob200A:
     if item[1] not in lojas:
         lojas[item[1]] = []
-    lojas[item[1]].append((item[0], "FONTE 60A"))
-for item in lite70:
+    lojas[item[1]].append((item[0], "Fonte Usina Bob 200A"))
+for item in FonteUsinaBatteryMeter50A:
     if item[1] not in lojas:
         lojas[item[1]] = []
-    lojas[item[1]].append((item[0], "FONTE 70A LITE"))
-for item in storm70:
+    lojas[item[1]].append((item[0], "Fonte Usina Battery Meter 50A"))
+for item in FonteUsinaBatteryMeter70A:
     if item[1] not in lojas:
         lojas[item[1]] = []
-    lojas[item[1]].append((item[0], "FONTE 70A"))
-for item in bob90:
+    lojas[item[1]].append((item[0], "Fonte Usina Battery Meter 70A"))
+for item in FonteUsinaBatteryMeter100A:
     if item[1] not in lojas:
         lojas[item[1]] = []
-    lojas[item[1]].append((item[0], "FONTE 90 BOB"))
-for item in bob120:
+    lojas[item[1]].append((item[0], "Fonte Usina Battery Meter 100A"))
+for item in FonteUsinaBatteryMeter120A:
     if item[1] not in lojas:
         lojas[item[1]] = []
-    lojas[item[1]].append((item[0], "FONTE 120 BOB"))
-for item in lite120:
+    lojas[item[1]].append((item[0], "Fonte Usina Battery Meter 120A"))
+for item in FonteUsinaSmart50A:
     if item[1] not in lojas:
         lojas[item[1]] = []
-    lojas[item[1]].append((item[0], "FONTE 120A LITE"))
-for item in storm120:
+    lojas[item[1]].append((item[0], "Fonte Usina Smart 50A"))
+for item in FonteUsinaSmart70A:
     if item[1] not in lojas:
         lojas[item[1]] = []
-    lojas[item[1]].append((item[0], "FONTE 120A"))
-for item in bob200:
+    lojas[item[1]].append((item[0], "Fonte Usina Smart 70A"))
+for item in FonteUsinaSmart100A:
     if item[1] not in lojas:
         lojas[item[1]] = []
-    lojas[item[1]].append((item[0], "FONTE 200 BOB"))
-for item in lite200:
+    lojas[item[1]].append((item[0], "Fonte Usina Smart 100A"))
+for item in FonteUsinaSmart120A:
     if item[1] not in lojas:
         lojas[item[1]] = []
-    lojas[item[1]].append((item[0], "FONTE 200A LITE"))
-for item in mono200:
+    lojas[item[1]].append((item[0], "Fonte Usina Smart 120A"))
+for item in FonteUsinaSmart160A:
     if item[1] not in lojas:
         lojas[item[1]] = []
-    lojas[item[1]].append((item[0], "FONTE 200 MONO"))
-for item in storm200:
+    lojas[item[1]].append((item[0], "Fonte Usina Smart 160A"))
+for item in FonteUsinaSmart200AMONO:
     if item[1] not in lojas:
         lojas[item[1]] = []
-    lojas[item[1]].append((item[0], "FONTE 200A"))
+    lojas[item[1]].append((item[0], "Fonte Usina Smart 200A MONO"))
+for item in FonteUsinaSmart200A:
+    if item[1] not in lojas:
+        lojas[item[1]] = []
+    lojas[item[1]].append((item[0], "Fonte Usina Smart 200A"))
+for item in FonteUsina220A:
+    if item[1] not in lojas:
+        lojas[item[1]] = []
+    lojas[item[1]].append((item[0], "Fonte Usina 220A"))
+for item in FonteUsina30A:
+    if item[1] not in lojas:
+        lojas[item[1]] = []
+    lojas[item[1]].append((item[0], "Fonte Usina 30A"))
+for item in FonteUsina70A:
+    if item[1] not in lojas:
+        lojas[item[1]] = []
+    lojas[item[1]].append((item[0], "Fonte Usina 70A"))
+for item in FonteUsina100A:
+    if item[1] not in lojas:
+        lojas[item[1]] = []
+    lojas[item[1]].append((item[0], "Fonte Usina 100A"))
+for item in ConversorDeTensao30A:
+    if item[1] not in lojas:
+        lojas[item[1]] = []
+    lojas[item[1]].append((item[0], "Conversor de Tensao 30A"))
+for item in ConversorDeTensao60A:
+    if item[1] not in lojas:
+        lojas[item[1]] = []
+    lojas[item[1]].append((item[0], "Conversor de Tensao 60A"))
+for item in ConversorDeTensao120A:
+    if item[1] not in lojas:
+        lojas[item[1]] = []
+    lojas[item[1]].append((item[0], "Conversor de Tensao 120A"))
+for item in ConversorDeTensao240A:
+    if item[1] not in lojas:
+        lojas[item[1]] = []
+    lojas[item[1]].append((item[0], "Conversor de Tensao 240A"))
+for item in CarregadorDeBateriasCharger60A:
+    if item[1] not in lojas:
+        lojas[item[1]] = []
+    lojas[item[1]].append((item[0], "Carregador de Baterias Charger 60A"))
 for i in lojas:
     output_doc.add_paragraph().add_run(f"*{i}*\n").bold = True
     for item, modelo in lojas[i]:
