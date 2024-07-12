@@ -306,7 +306,8 @@ class MlSpider(scrapy.Spider):
                 new_name = name.lower();
                 new_name = unidecode.unidecode(new_name)
                 if self.option_selected == "Fonte Usina Bob 60A":       
-                    if "bob" in new_name and "usina" in new_name and "smart" not in new_name and "samrt" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name:
+                    print(new_name)
+                    if "bob" in new_name and "usina" in new_name and "smart" not in new_name and "samrt" not in new_name and "battery" not in new_name and "meter" not in new_name and "24v" not in new_name:          
                         if "60a" in new_name or "60" in new_name or "60 amperes" in new_name or "60amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-60a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
@@ -316,7 +317,7 @@ class MlSpider(scrapy.Spider):
                             yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-60a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
 
                 if self.option_selected == "Fonte Usina Bob 120A":       
-                    if "bob" in new_name and "usina" in new_name and "smart" not in new_name and "samrt" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name:
+                    if "bob" in new_name and "usina" in new_name and "smart" not in new_name and "samrt" not in new_name and "battery" not in new_name and "meter" not in new_name and "24v" not in new_name:
                         if "120a" in new_name or "120" in new_name or "120 amperes" in new_name or "120amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-120a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
@@ -326,7 +327,7 @@ class MlSpider(scrapy.Spider):
                             yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-120a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
                 if self.option_selected == "Fonte Usina Bob 200A":       
-                    if "bob" in new_name and "usina" in new_name and "smart" not in new_name and "samrt" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name and "12v" in new_name:
+                    if "bob" in new_name and "usina" in new_name and "smart" not in new_name and "samrt" not in new_name and "battery" not in new_name and "meter" not in new_name and "24v" not in new_name and "24v" not in new_name:
                         if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-200a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
@@ -336,7 +337,7 @@ class MlSpider(scrapy.Spider):
                             yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-200a-bob_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
                 if self.option_selected == "Fonte Usina Battery Meter 50A":       
-                    if "usina" in new_name and "battery" in new_name and "meter" in new_name and "bob" not in new_name and "12v" in new_name:
+                    if "usina" in new_name and "battery" in new_name and "meter" in new_name and "bob" not in new_name and "24v" not in new_name:
                         if "50a" in new_name or "50" in new_name or "50 amperes" in new_name or "50amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-50a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
@@ -346,7 +347,7 @@ class MlSpider(scrapy.Spider):
                             yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-50a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
                 if self.option_selected == "Fonte Usina Battery Meter 70A":       
-                    if "usina" in new_name and "battery" in new_name and "meter" in new_name and "bob" not in new_name and "12v" in new_name:
+                    if "usina" in new_name and "battery" in new_name and "meter" in new_name and "bob" not in new_name and "24v" not in new_name:
                         if "50a" in new_name or "50" in new_name or "50 amperes" in new_name or "50amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-50a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
@@ -356,7 +357,7 @@ class MlSpider(scrapy.Spider):
                             yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-50a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
                 if self.option_selected == "Fonte Usina Battery Meter 100A":       
-                    if "usina" in new_name and "battery" in new_name and "meter" in new_name and "bob" not in new_name and "12v" in new_name:
+                    if "usina" in new_name and "battery" in new_name and "meter" in new_name and "bob" not in new_name and "24v" not in new_name:
                         if "100a" in new_name or "100" in new_name or "100 amperes" in new_name or "100amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-100a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
@@ -366,7 +367,7 @@ class MlSpider(scrapy.Spider):
                             yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-100a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
                 if self.option_selected == "Fonte Usina Battery Meter 120A":       
-                    if "usina" in new_name and "battery" in new_name and "meter" in new_name and "bob" not in new_name and "12v" in new_name:
+                    if "usina" in new_name and "battery" in new_name and "meter" in new_name and "bob" not in new_name and "24v" not in new_name:
                         if "120a" in new_name or "120" in new_name or "120 amperes" in new_name or "120amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-120a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
@@ -376,7 +377,7 @@ class MlSpider(scrapy.Spider):
                             yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-120a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
                 if self.option_selected == "Fonte Usina Smart 50A":       
-                    if "usina" in new_name and ("smart" in new_name or "samrt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name:
+                    if "usina" in new_name and ("smart" in new_name or "samrt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "24v" not in new_name:
                         if "50a" in new_name or "50" in new_name or "50 amperes" in new_name or "50amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-50a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
@@ -386,7 +387,7 @@ class MlSpider(scrapy.Spider):
                             yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-50a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
                 if self.option_selected == "Fonte Usina Smart 70A":       
-                    if "usina" in new_name and ("smart" in new_name or "samrt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name:
+                    if "usina" in new_name and ("smart" in new_name or "samrt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "24v" not in new_name:
                         if "70a" in new_name or "70" in new_name or "70 amperes" in new_name or "70amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-70a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
@@ -396,7 +397,7 @@ class MlSpider(scrapy.Spider):
                             yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-70a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
                 if self.option_selected == "Fonte Usina Smart 100A":       
-                    if "usina" in new_name and ("smart" in new_name or "samrt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name:
+                    if "usina" in new_name and ("smart" in new_name or "samrt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "24v" not in new_name:
                         if "100a" in new_name or "100" in new_name or "100 amperes" in new_name or "100amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-100a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
@@ -406,7 +407,7 @@ class MlSpider(scrapy.Spider):
                             yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-100a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
                 if self.option_selected == "Fonte Usina Smart 120A":       
-                    if "usina" in new_name and ("smart" in new_name or "samrt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name:
+                    if "usina" in new_name and ("smart" in new_name or "samrt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "24v" not in new_name:
                         if "120a" in new_name or "120" in new_name or "120 amperes" in new_name or "120amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-120a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
@@ -416,7 +417,7 @@ class MlSpider(scrapy.Spider):
                             yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-120a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
                 if self.option_selected == "Fonte Usina Smart 160A":       
-                    if "usina" in new_name and ("smart" in new_name or "samrt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name:
+                    if "usina" in new_name and ("smart" in new_name or "samrt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "24v" not in new_name:
                         if "160a" in new_name or "160" in new_name or "160 amperes" in new_name or "160amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-160a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
@@ -426,7 +427,7 @@ class MlSpider(scrapy.Spider):
                             yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-160a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
                 if self.option_selected == "Fonte Usina Smart 200A MONO":       
-                    if "usina" in new_name and ("smart" in new_name or "samrt" in new_name) and ("mono" in new_name or "220v" in new_name or "monovolt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name:
+                    if "usina" in new_name and ("smart" in new_name or "samrt" in new_name) and ("mono" in new_name or "220v" in new_name or "monovolt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "24v" not in new_name:
                         if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-200a-mono-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
@@ -436,7 +437,7 @@ class MlSpider(scrapy.Spider):
                             yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-200a-mono-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
                 if self.option_selected == "Fonte Usina Smart 200A":       
-                    if "usina" in new_name and ("samrt" in new_name or "samrt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "12v" in new_name:
+                    if "usina" in new_name and ("samrt" in new_name or "samrt" in new_name) and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "24v" not in new_name:
                         if "200a" in new_name or "200" in new_name or "200 amperes" in new_name or "200amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-200a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
@@ -446,7 +447,7 @@ class MlSpider(scrapy.Spider):
                             yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-200a-smart_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
                 if self.option_selected == "Fonte Usina 220A":       
-                    if "usina" in new_name and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "smart" not in new_name and "samrt" not in new_name and "12v" in new_name:
+                    if "usina" in new_name and "bob" not in new_name and "battery" not in new_name and "meter" not in new_name and "smart" not in new_name and "samrt" not in new_name and "24v" not in new_name:
                         if "220a" in new_name or "220" in new_name or "220 amperes" in new_name or "220amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-220a_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
@@ -526,7 +527,7 @@ class MlSpider(scrapy.Spider):
                             yield scrapy.Request(url='https://www.lsdistribuidora.com.br/conversor_de_tensao_240a_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                                                     
                 if self.option_selected == "Carregador de Baterias Charger 60A":       
-                    if "usina" in new_name and "charger" in new_name and "12v" in new_name:
+                    if "usina" in new_name and "charger" in new_name and "24v" not in new_name:
                         if "60a" in new_name or "60" in new_name or "60 amperes" in new_name or "60amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
                             yield scrapy.Request(url='https://www.radicalsom.com.br/carregador_baterias_charger_60a_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
