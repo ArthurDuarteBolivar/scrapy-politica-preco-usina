@@ -306,7 +306,6 @@ class MlSpider(scrapy.Spider):
                 new_name = name.lower();
                 new_name = unidecode.unidecode(new_name)
                 if self.option_selected == "Fonte Usina Bob 60A":       
-                    print(new_name)
                     if "bob" in new_name and "usina" in new_name and "smart" not in new_name and "samrt" not in new_name and "battery" not in new_name and "meter" not in new_name and "24v" not in new_name:          
                         if "60a" in new_name or "60" in new_name or "60 amperes" in new_name or "60amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
@@ -348,13 +347,13 @@ class MlSpider(scrapy.Spider):
                             
                 if self.option_selected == "Fonte Usina Battery Meter 70A":       
                     if "usina" in new_name and "battery" in new_name and "meter" in new_name and "bob" not in new_name and "24v" not in new_name:
-                        if "50a" in new_name or "50" in new_name or "50 amperes" in new_name or "50amperes" in new_name:
+                        if "70a" in new_name or "70" in new_name or "70 amperes" in new_name or "70amperes" in new_name:
                             yield scrapy.Request(url=url, callback=self.parse_product, meta={'name': name, 'loja': loja, 'price':price, 'listing_type': listing_type})
-                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-50a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-50a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-50a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-50a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
-                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-50a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.radicalsom.com.br/fonte-usina-70a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_radicalson, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.bestonline.com.br/fonte-usina-70a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_bestonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.shoppratico.com.br/fonte-usina-70a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_shoppratico, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.renovonline.com.br/fonte-usina-70a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_renovonline, meta={'name': name, 'loja': loja, 'price':price})
+                            yield scrapy.Request(url='https://www.lsdistribuidora.com.br/fonte-usina-70a-battery-meter_OrderId_PRICE_NoIndex_True', callback=self.parse_lsdistribuidora, meta={'name': name, 'loja': loja, 'price':price})
                             
                 if self.option_selected == "Fonte Usina Battery Meter 100A":       
                     if "usina" in new_name and "battery" in new_name and "meter" in new_name and "bob" not in new_name and "24v" not in new_name:
